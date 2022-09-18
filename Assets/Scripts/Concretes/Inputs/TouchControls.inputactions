@@ -1,0 +1,71 @@
+{
+    "name": "TouchControls",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "92daa187-b33c-4389-bee7-27bdf642f907",
+            "actions": [
+                {
+                    "name": "TouchH",
+                    "type": "PassThrough",
+                    "id": "20eec609-61f9-480d-801f-2ebadd39e055",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold"
+                },
+                {
+                    "name": "TouchInput",
+                    "type": "PassThrough",
+                    "id": "23cef57e-e25a-4e8e-8fba-12140358cf38",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold"
+                },
+                {
+                    "name": "TouchV",
+                    "type": "PassThrough",
+                    "id": "ee24609e-d646-4567-b6a1-cfb39c5baa13",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4ee51912-07db-4c0b-95ae-94ac13588c7d",
+                    "path": "<Touchscreen>/delta/x",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchH",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "350d10df-60d3-4661-8fce-a0d43c2452b2",
+                    "path": "<Touchscreen>/primaryTouch",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d98d844-f877-4800-b7d5-529bb2f54ddc",
+                    "path": "<Touchscreen>/delta/y",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchV",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
