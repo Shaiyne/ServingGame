@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HorizontalCommand
+public class MovementCommand
 {
-    public void HorizontalUpdate(TouchControls touchControlls) {
+    public void MovementCommandUpdate(TouchControls touchControlls) {
         if (touchControlls.Touch.TouchH.ReadValue<float>() != 0 || touchControlls.Touch.TouchV.ReadValue<float>() != 0)
         {
             InputSignals.Instance.onRunnerInputDragged?.Invoke(new RunnerInputParams()

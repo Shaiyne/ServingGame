@@ -6,31 +6,25 @@ using UnityEngine;
 
 namespace Servingame.Movements
 {
-    public class VerticalMove 
+    public class VerticalMove : PlayerMovements
     {
         IEntityController entity;
-        float maxHSpeed = 0.7f;
 
         public VerticalMove(IEntityController entityController)
         {
             entity = entityController;
         }
-        public virtual void VerticalMoveMethod(float vertical, float moveSpeed)
+        public virtual void VerticalMovement(float vertical, float moveSpeed)
         {
-            if (vertical == 0f) return;
-            if (Input.GetMouseButton(0))
-            {
-                vertical = Mathf.Clamp(vertical, -maxHSpeed, maxHSpeed);
-                entity.transform.Translate(Vector3.forward * vertical * Time.deltaTime * moveSpeed, Space.World);
-            }
-            else return;
+            //if (vertical == 0f) return;
+            //if (Input.GetMouseButton(0))
+            //{
+            //    vertical = ClampMethod(vertical);
+            //    entity.transform.Translate(Vector3.forward * vertical * Time.deltaTime * moveSpeed, Space.World);
+            //}
+            //else return;
+            PlayerDirection(vertical,moveSpeed,entity,Vector3.forward);
         }
-        public float characterZClamp(float position, float value)
-        {
-            position = Mathf.Clamp(position, -value, value);
-            return position;
-        }
-
 
     }
 }

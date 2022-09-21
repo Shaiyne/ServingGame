@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Servingame.Controllers
 {
-    public class PlayerController : MonoBehaviour , IEntityController
+    public class PlayerController : MonoBehaviour , IEntityController , IMovement
     {
         //PlayerAnimation _playerAnimation;
         [SerializeField] private PlayerManager playerManager;
@@ -16,9 +16,13 @@ namespace Servingame.Controllers
         RotationMove _rotationMove;
         Rigidbody rb;
         [SerializeField]private bool _isReadyToPlay,_isReadyToMove=false;
-        float _horizontal;
-        float _vertical ;
-        [SerializeField] float _moveSpeed=5f;
+        //float _horizontal;
+        //float _vertical ;
+        //[SerializeField] float _moveSpeed=5f;
+
+        public float HorizontalSpeed { get ; set ; }
+        public float VerticalSpeed { get ; set ; }
+        public float MoveSpeed { get ; set ; }
 
         private void Awake()
         {
@@ -26,6 +30,7 @@ namespace Servingame.Controllers
             _verticalMove = new VerticalMove(this);
             _rotationMove = new RotationMove(this);
             rb = GetComponent<Rigidbody>();
+            MoveSpeed = 5f;
         }
         private void FixedUpdate()
         {
@@ -50,22 +55,22 @@ namespace Servingame.Controllers
             DisableMovement();
         }
 
-        public void HorizontalMovement(float value)
-        {
-            _horizontal = _horizontal + value * Time.deltaTime * 1.5f;
-        }
+        //public void HorizontalMovement(float value)
+        //{
+        //    _horizontal = _horizontal + value * Time.deltaTime * 1.5f;
+        //}
 
-        public void VerticalMovement(float value)
-        {
-            _vertical = _vertical + value * Time.deltaTime * 1.5f;
-        }
+        //public void VerticalMovement(float value)
+        //{
+        //    _vertical = _vertical + value * Time.deltaTime * 1.5f;
+        //}
 
         public void IsPlayerMoved()
         {
 
-            _horizontalMove.TickFixed(_horizontal, _moveSpeed);
-            _verticalMove.VerticalMoveMethod(_vertical, _moveSpeed);
-            _rotationMove.RotationPlayer(_horizontal, _vertical);
+            _horizontalMove.HorizontalMovement(HorizontalSpeed, MoveSpeed);
+            _verticalMove.VerticalMovement(VerticalSpeed, MoveSpeed);
+            _rotationMove.RotationPlayer(HorizontalSpeed, VerticalSpeed);
         }
         public void EnableMovement()
         {
@@ -93,14 +98,14 @@ namespace Servingame.Controllers
 
         public void UpdateRunnerInputValue(RunnerInputParams runnerInputParams)
         {
-            _horizontal += runnerInputParams.XValue * Time.deltaTime * 1.5f;
-            _vertical += runnerInputParams.ZValue * Time.deltaTime * 1.5f;
+            HorizontalSpeed += runnerInputParams.XValue * Time.deltaTime * 5f;
+            VerticalSpeed += runnerInputParams.ZValue * Time.deltaTime * 5f;
         }
 
         public void SetRunnerInputValue(float x,float z)
         {
-            _horizontal = x;
-            _vertical = z;
+            HorizontalSpeed = x;
+            VerticalSpeed = z;
         }
         
         public void IsPlayerMoving()

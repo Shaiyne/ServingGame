@@ -13,14 +13,14 @@ public class InputManager : Singleton<InputManager>
     public event StartTouchVEvent OnStartTouchV;
 
     private TouchControls touchControls;
-    private HorizontalCommand _horizontalCommand;
+    private MovementCommand _horizontalCommand;
     private GameStates _currentState = GameStates.Runner;
     [SerializeField] private bool _isReadyToMove;
 
     private void Awake()
     {
         touchControls = new TouchControls();
-        _horizontalCommand = new HorizontalCommand();
+        _horizontalCommand = new MovementCommand();
     }
 
     private void OnEnable()
@@ -37,7 +37,7 @@ public class InputManager : Singleton<InputManager>
     {
         if(_currentState== GameStates.Runner)
         {
-            _horizontalCommand.HorizontalUpdate(touchControls);
+            _horizontalCommand.MovementCommandUpdate(touchControls);
         }
     }
 

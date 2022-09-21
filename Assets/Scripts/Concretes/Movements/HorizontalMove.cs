@@ -5,35 +5,25 @@ using Servingame.Abstracts.Controllers;
 
 namespace Servingame.Movements
 {
-    public class HorizontalMove 
+    public class HorizontalMove : PlayerMovements
     {
-        float maxHSpeed = 0.7f;
         IEntityController entity;
 
         public HorizontalMove(IEntityController entityController)
         {
             entity = entityController;
         }
-        public virtual void TickFixed(float horizontal, float moveSpeed)
+        public virtual void HorizontalMovement(float horizontal, float moveSpeed)
         {
-            if (horizontal == 0f) return;
-            if (Input.GetMouseButton(0))
-            {
-                horizontal = Mathf.Clamp(horizontal, -maxHSpeed, maxHSpeed);
-                entity.transform.Translate(Vector3.right * horizontal * Time.deltaTime * moveSpeed, Space.World);
-            }
-            else
-            {
-                return;
-            }
+            //if (horizontal == 0f) return;
+            //if (Input.GetMouseButton(0))
+            //{
+            //    horizontal = ClampMethod(horizontal);
+            //    entity.transform.Translate(Vector3.right * horizontal * Time.deltaTime * moveSpeed, Space.World);
+            //}
+            //else return;
+            PlayerDirection(horizontal, moveSpeed, entity, Vector3.right);
         }
-
-        public float characterXClamp(float position, float value)
-        {
-            position = Mathf.Clamp(position, -value, value);
-            return position;
-        }
-
 
     }
 
