@@ -108,10 +108,6 @@ namespace Servingame.Controllers
             VerticalSpeed = z;
         }
         
-        public void IsPlayerMoving()
-        {
-
-        }
     }
 
 }

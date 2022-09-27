@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class PlayerPhysicsController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("barrolTag"))
+        {
+            InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.FillUp);
+            TraySignals.Instance.onSetTrayPosition?.Invoke(TrayStates.FillingState);
+            TraySignals.Instance.onTrayActive?.Invoke(true);
+        }
+        if (collision.gameObject.CompareTag("trashTag"))
+        {
+            InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.Running);
+            TraySignals.Instance.onTrayActive?.Invoke(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionExit(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("barrolTag"))
+        {
+            InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.ServingRunning);
+            TraySignals.Instance.onSetTrayPosition?.Invoke(TrayStates.ServingState);
+
+        }
+
     }
 }

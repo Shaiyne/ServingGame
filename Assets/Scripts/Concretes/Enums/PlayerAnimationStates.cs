@@ -3,6 +3,6 @@ public enum PlayerAnimationStates
     Idle,
     Running,
     ServingIdle,
-    ServingRunner,
+    ServingRunning,
     FillUp
 }

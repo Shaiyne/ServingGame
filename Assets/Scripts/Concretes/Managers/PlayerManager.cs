@@ -8,16 +8,18 @@ public class PlayerManager : MonoBehaviour
     PlayerController _playerController;
     public GameStates CurrentGameStates;
     PlayerAnimationController _playerAnimationController;
+    InputManager _inputManager;
+    [SerializeField] GameObject _tray;
 
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _playerAnimationController = GetComponent<PlayerAnimationController>();
+        _inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
     }
 
     private void FixedUpdate()
     {
-        
     }
     private void OnEnable()
     {
@@ -36,19 +38,21 @@ public class PlayerManager : MonoBehaviour
     {
         InputSignals.Instance.onInputTaken += onActiveMovement;
         InputSignals.Instance.onRunnerInputDragged += OnGetRunnerInputValues;
-        InputSignals.Instance.onInputReleased += CheckIsRunning;
+        //InputSignals.Instance.onInputReleased += CheckIsRunning;
+        InputSignals.Instance.onAnimationInputState += ToChangeAnimation;
     }
 
     void DesubsribeEvents()
     {
         InputSignals.Instance.onInputTaken -= onActiveMovement;
         InputSignals.Instance.onRunnerInputDragged -= OnGetRunnerInputValues;
-        InputSignals.Instance.onInputReleased += CheckIsRunning;
+        //InputSignals.Instance.onInputReleased -= CheckIsRunning;
+        InputSignals.Instance.onAnimationInputState -= ToChangeAnimation;
     }
     private void onActiveMovement()
     {
         _playerController.EnableMovement();
-        _playerAnimationController.ChangePlayerAnimation(PlayerAnimationStates.Running);
+        //_playerAnimationController.ChangePlayerAnimation(PlayerAnimationStates.Running);
     }
 
     private void OnGetRunnerInputValues(RunnerInputParams runnerInputParams)
@@ -71,4 +75,11 @@ public class PlayerManager : MonoBehaviour
     {
         _playerAnimationController.ChangePlayerAnimation(PlayerAnimationStates.Idle);
     }
+
+    public void ToChangeAnimation(PlayerAnimationStates playerAnimationStates)
+    {
+        _playerAnimationController.ChangePlayerAnimation(playerAnimationStates);
+        _inputManager.GetPlayerState(playerAnimationStates);
+    }
+
 }

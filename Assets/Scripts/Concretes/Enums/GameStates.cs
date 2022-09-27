@@ -1,5 +1,5 @@
 public enum GameStates
 {
-    Runner,
+    CanMoveSituation,
     CantMoveSituation
 }

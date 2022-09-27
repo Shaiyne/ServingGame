@@ -13,14 +13,17 @@ public class InputManager : Singleton<InputManager>
     public event StartTouchVEvent OnStartTouchV;
 
     private TouchControls touchControls;
-    private MovementCommand _horizontalCommand;
-    private GameStates _currentState = GameStates.Runner;
+    private MovementEmptyCommand _emptyCommand;
+    private MovementServingCommand _servingCommand;
+    private GameStates _currentState = GameStates.CanMoveSituation;
+    private PlayerAnimationStates PlayerAnimationStates;
     [SerializeField] private bool _isReadyToMove;
 
     private void Awake()
     {
         touchControls = new TouchControls();
-        _horizontalCommand = new MovementCommand();
+        _emptyCommand = new MovementEmptyCommand();
+        _servingCommand = new MovementServingCommand();
     }
 
     private void OnEnable()
@@ -35,9 +38,21 @@ public class InputManager : Singleton<InputManager>
     }
     private void Update()
     {
-        if(_currentState== GameStates.Runner)
+        if(_currentState == GameStates.CanMoveSituation)
         {
-            _horizontalCommand.MovementCommandUpdate(touchControls);
+            //_emptyCommand.MovementEmptyCommandUpdate(touchControls);
+            if(PlayerAnimationStates == PlayerAnimationStates.FillUp)
+            {
+                _servingCommand.MovementFillUpCommandUpdate(touchControls);
+            }
+            else if (PlayerAnimationStates == PlayerAnimationStates.ServingIdle || PlayerAnimationStates == PlayerAnimationStates.ServingRunning)
+            {
+                _servingCommand.MovementServingCommandUpdate(touchControls);
+            }
+            else if(PlayerAnimationStates == PlayerAnimationStates.Idle || PlayerAnimationStates == PlayerAnimationStates.Running)
+            {
+                _emptyCommand.MovementEmptyCommandUpdate(touchControls);
+            }
         }
     }
 
@@ -71,5 +86,8 @@ public class InputManager : Singleton<InputManager>
         _isReadyToMove = false;
     }
 
-
+    public void GetPlayerState(PlayerAnimationStates playerAnimationStates)
+    {
+        PlayerAnimationStates = playerAnimationStates;
+    }
 }

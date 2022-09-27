@@ -13,6 +13,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void ChangePlayerAnimation(PlayerAnimationStates playerAnimationStates)
     {
+        //Debug.Log(playerAnimationStates);
         switch (playerAnimationStates)
         {
             case PlayerAnimationStates.Idle:
@@ -24,7 +25,7 @@ public class PlayerAnimationController : MonoBehaviour
             case PlayerAnimationStates.ServingIdle:
                 animator.Play(playerAnimationStates.ToString());
                 break;
-            case PlayerAnimationStates.ServingRunner:
+            case PlayerAnimationStates.ServingRunning:
                 animator.Play(playerAnimationStates.ToString());
                 break;
             case PlayerAnimationStates.FillUp:
