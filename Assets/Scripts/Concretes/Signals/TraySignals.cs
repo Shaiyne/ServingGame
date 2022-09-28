@@ -7,4 +7,5 @@ public class TraySignals : Singleton<TraySignals>
 {
     public UnityAction<TrayStates> onSetTrayPosition = delegate { };
     public UnityAction<bool> onTrayActive = delegate { };
+    public UnityAction<string> onGetColor = delegate { };
 }

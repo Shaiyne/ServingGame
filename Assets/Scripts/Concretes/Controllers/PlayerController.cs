@@ -16,9 +16,6 @@ namespace Servingame.Controllers
         RotationMove _rotationMove;
         Rigidbody rb;
         [SerializeField]private bool _isReadyToPlay,_isReadyToMove=false;
-        //float _horizontal;
-        //float _vertical ;
-        //[SerializeField] float _moveSpeed=5f;
 
         public float HorizontalSpeed { get ; set ; }
         public float VerticalSpeed { get ; set ; }
@@ -55,16 +52,6 @@ namespace Servingame.Controllers
             DisableMovement();
         }
 
-        //public void HorizontalMovement(float value)
-        //{
-        //    _horizontal = _horizontal + value * Time.deltaTime * 1.5f;
-        //}
-
-        //public void VerticalMovement(float value)
-        //{
-        //    _vertical = _vertical + value * Time.deltaTime * 1.5f;
-        //}
-
         public void IsPlayerMoved()
         {
 
@@ -74,15 +61,11 @@ namespace Servingame.Controllers
         }
         public void EnableMovement()
         {
-            //InputManager.Instance.OnStartTouchH += HorizontalMovement;
-            //InputManager.Instance.OnStartTouchV += VerticalMovement;
             _isReadyToMove = true;
 
         }
         public void DisableMovement()
         {
-            //InputManager.Instance.OnStartTouchH -= HorizontalMovement;
-            //InputManager.Instance.OnStartTouchV -= VerticalMovement;
             _isReadyToMove = false;
         }
         public void IsReadyToPlay(bool readyToPlayBool)

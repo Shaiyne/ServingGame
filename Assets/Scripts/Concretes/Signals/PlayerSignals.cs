@@ -6,5 +6,5 @@ using UnityEngine.Events;
 
 public class PlayerSignals : Singleton<PlayerSignals>
 {
-    //public UnityAction<bool> onResetServing = delegate { };
+    public UnityAction<DrinkStates> onCompareColor = delegate { };
 }

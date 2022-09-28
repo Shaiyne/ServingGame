@@ -9,13 +9,16 @@ public class PlayerManager : MonoBehaviour
     public GameStates CurrentGameStates;
     PlayerAnimationController _playerAnimationController;
     InputManager _inputManager;
-    [SerializeField] GameObject _tray;
+    TrayController _trayController;
+    TrayManager _trayManager;
 
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _playerAnimationController = GetComponent<PlayerAnimationController>();
         _inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        _trayController = GameObject.Find("TrayManager").GetComponent<TrayController>();
+        _trayManager = GameObject.Find("TrayManager").GetComponent<TrayManager>();
     }
 
     private void FixedUpdate()
@@ -38,42 +41,31 @@ public class PlayerManager : MonoBehaviour
     {
         InputSignals.Instance.onInputTaken += onActiveMovement;
         InputSignals.Instance.onRunnerInputDragged += OnGetRunnerInputValues;
-        //InputSignals.Instance.onInputReleased += CheckIsRunning;
         InputSignals.Instance.onAnimationInputState += ToChangeAnimation;
+        PlayerSignals.Instance.onCompareColor += CompareDrinkToRequest;
     }
 
     void DesubsribeEvents()
     {
         InputSignals.Instance.onInputTaken -= onActiveMovement;
         InputSignals.Instance.onRunnerInputDragged -= OnGetRunnerInputValues;
-        //InputSignals.Instance.onInputReleased -= CheckIsRunning;
         InputSignals.Instance.onAnimationInputState -= ToChangeAnimation;
+        PlayerSignals.Instance.onCompareColor -= CompareDrinkToRequest;
     }
     private void onActiveMovement()
     {
         _playerController.EnableMovement();
-        //_playerAnimationController.ChangePlayerAnimation(PlayerAnimationStates.Running);
     }
 
     private void OnGetRunnerInputValues(RunnerInputParams runnerInputParams)
     {
         _playerController.UpdateRunnerInputValue(runnerInputParams);
     }
-    private void OnGetIdle()
-    {
-        _playerAnimationController.ChangePlayerAnimation(PlayerAnimationStates.Idle);
-    }
-
 
     private void onDeactiveMovement()
     {
         _playerController.DisableMovement();
         _playerController.SetRunnerInputValue(0, 0);
-    }
-
-    public void CheckIsRunning()
-    {
-        _playerAnimationController.ChangePlayerAnimation(PlayerAnimationStates.Idle);
     }
 
     public void ToChangeAnimation(PlayerAnimationStates playerAnimationStates)
@@ -82,4 +74,9 @@ public class PlayerManager : MonoBehaviour
         _inputManager.GetPlayerState(playerAnimationStates);
     }
 
+    public void CompareDrinkToRequest(DrinkStates drinkStates)
+    {
+        //_trayController.CompareRequest(drinkStates);
+        _trayManager.CompareRequest(drinkStates);
+    }
 }

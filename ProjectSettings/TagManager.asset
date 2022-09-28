@@ -6,6 +6,8 @@ TagManager:
   tags:
   - barrolTag
   - deskTag
+  - trashTag
+  - customerTag
   layers:
   - Default
   - TransparentFX
