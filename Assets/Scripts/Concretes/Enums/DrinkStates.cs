@@ -1,7 +1,8 @@
 public enum DrinkStates
 {
-    Red,
+    Null,
     Blue,
+    Red,
     Yellow,
     White,
     GreenMixed,

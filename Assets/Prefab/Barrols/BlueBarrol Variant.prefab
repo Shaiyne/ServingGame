@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 91282627}
   - component: {fileID: 91282626}
   - component: {fileID: 6528251229483175314}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: blue
-  m_TagString: Untagged
+  m_TagString: blueTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 757361173}
   - component: {fileID: 757361176}
   - component: {fileID: 757361175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,6 +237,10 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 8eb45922989ef4758add4dfda9b3d6b6, type: 3}
       propertyPath: m_Name
       value: BlueBarrol Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 8eb45922989ef4758add4dfda9b3d6b6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eb45922989ef4758add4dfda9b3d6b6, type: 3}

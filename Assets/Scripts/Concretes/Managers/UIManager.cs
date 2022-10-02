@@ -5,41 +5,117 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public int Money;
-
+    MoneyController _moneyController;
+    UIScrollbar _uiScrollbar;
+    [SerializeField] GameStates _gameStates; 
     [SerializeField] private Text MoneyText;
+    [SerializeField] private GameObject MoneyUI;
+    [SerializeField] private GameObject _scrollbar;
+    [SerializeField] private GameObject _upgradePanel;
 
     private void Awake()
     {
-        Money = PlayerPrefs.GetInt("MoneySave");
+        _moneyController = GetComponent<MoneyController>();
+        _gameStates = GameStates.CanMoveSituation;
+        _uiScrollbar = GetComponentInChildren<UIScrollbar>();
     }
-    private void Update()
-    {
-        MoneyText.text = " " + PlayerPrefs.GetInt("MoneySave",Money);
-    }
-
     private void OnEnable()
     {
-        UISignals.Instance.onMoneyCollect += MoneyCollect;
+        SubscribeEvent();
     }
     private void OnDisable()
     {
-        UISignals.Instance.onMoneyCollect -= MoneyCollect;
+        DesubscribeEvent();
+    }
+
+    private void SubscribeEvent()
+    {
+        UISignals.Instance.onMoneyChange += MoneyCollect;
+        UISignals.Instance.onPlay += ShowExistMoney;
+        UISignals.Instance.onActivenesScrollbar += ActivenesScrollbar;
+        UISignals.Instance.onScrollbarFill += ScrollbarFillSpeed;
+        UISignals.Instance.onScrollbarFull += IsScrollbarFull;
+        UISignals.Instance.onResetScrollbar += ResetScrollbar;
+        CoreGameSignals.Instance.onPlay += OnPlay;
+        CoreGameSignals.Instance.onGamePause += OnGamePause;
+        UpgradeSignals.Instance.onUpgradePanelOpen += OpenUpgradePanel;
+    }
+    private void DesubscribeEvent()
+    {
+        UISignals.Instance.onMoneyChange -= MoneyCollect;
+    }
+
+    private void OnPlay()
+    {
+        ShowExistMoney();
+        PlayState();
+    }
+
+    private void OnGamePause()
+    {
+        PauseStage();
+    }
+    private void PlayState()
+    {
+        MoneyUI.gameObject.SetActive(true);
+    }
+    private void PauseStage()
+    {
+        MoneyUI.gameObject.SetActive(false);
     }
     public void MoneyCollect(int earningMoney)
     {
-        Money += earningMoney;
-        SaveMoney(Money);
+        _moneyController.EarningMoney(earningMoney);
     }
 
     private void SaveMoney(int value)
     {
-        PlayerPrefs.SetInt("MoneySave", value);
+        _moneyController.SaveMoney(value);
     }
 
-    private void OnApplicationQuit()
+    private void ShowExistMoney()
     {
-        //PlayerPrefs.SetInt("MoneySave", Money);
-        //UISignals.Instance.onQuit += SaveMoney;
+        MoneyText.text = " " + PlayerPrefs.GetInt("MoneyData");
+    }
+    private void ActivenesScrollbar(bool value)
+    {
+        _uiScrollbar.ActivenesScrollbar(value);
+    }
+    private void ScrollbarFillSpeed()
+    {
+        _uiScrollbar.FillScrollbar(UpgradeManager.Instance.upgrade.ScrollbarSpeed);
+    }
+
+    private void IsScrollbarFull()
+    {
+        _uiScrollbar.GetScrollbar();
+    }
+
+    private void ResetScrollbar()
+    {
+        _uiScrollbar.ResetScrollbar();
+    }
+
+    private void OpenUpgradePanel()
+    {
+        _upgradePanel.SetActive(true);
+    }
+    public void CloseUpgradePanel()
+    {
+        _upgradePanel.SetActive(false);
+        CoreGameSignals.Instance.onGamePlay?.Invoke();
+    }
+
+    public void UpgradeCustomerButton()
+    {
+        UpgradeSignals.Instance.onUpgradeCustomerButton?.Invoke();
+    }
+    public void UpgradeDrinkTypeButton()
+    {
+        UpgradeSignals.Instance.onUpgradeDrinkType?.Invoke();
+    }
+    public void UpgradeScrollbarButton()
+    {
+        UpgradeSignals.Instance.onUpgradeScrollbar?.Invoke();
     }
 }

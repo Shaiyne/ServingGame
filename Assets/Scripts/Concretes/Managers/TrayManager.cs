@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrayManager : MonoBehaviour
 {
     [SerializeField] private Vector3 fillupTrayPosition;
     [SerializeField] private Vector3 servingTrayPosition;
-    public DrinkStates drinkStates;
+    public DrinkStates _drinkStates;
     TrayController _trayController;
+    UIScrollbar _uiScrollbar;
+    [SerializeField] private Sprite[] _playerDrinkSprite;
+    [SerializeField] private Image _playerDrinkImage;
 
     private void Awake()
     {
         _trayController = GetComponent<TrayController>();
+        _uiScrollbar = GameObject.Find("UIManager").GetComponentInChildren<UIScrollbar>();
     }
 
     private void OnEnable()
@@ -28,12 +33,14 @@ public class TrayManager : MonoBehaviour
         TraySignals.Instance.onSetTrayPosition += SetTrayPosition;
         TraySignals.Instance.onTrayActive += SetActiveTray;
         TraySignals.Instance.onGetColor += ChangingDrinkColor;
+        TraySignals.Instance.onResetDrinkState += ResetDrinkState;
     }
     void DesubscribeEvents()
     {
         TraySignals.Instance.onSetTrayPosition -= SetTrayPosition;
         TraySignals.Instance.onTrayActive -= SetActiveTray;
         TraySignals.Instance.onGetColor -= ChangingDrinkColor;
+        TraySignals.Instance.onResetDrinkState -= ResetDrinkState;
     }
     public void SetTrayPosition(TrayStates trayStates)
     {
@@ -53,13 +60,25 @@ public class TrayManager : MonoBehaviour
         _trayController.TrayActiveOrDeactive(value);
     }
 
-    public void ChangingDrinkColor(string text)
+    public void CompareRequest(GameObject customerObject)
     {
-        drinkStates = _trayController.SetDrinkColor(text);
+        _trayController.CheckRequest(customerObject);
     }
-    
-    public void CompareRequest(DrinkStates drinkStates)
+
+    public void ChangingDrinkColor(string barrolColor)
     {
-        _trayController.CheckRequest(drinkStates);
+        _trayController.SetDrinkColor(barrolColor);
+        SetPlayerDrinkUI();
+    }
+
+    public void ResetDrinkState()
+    {
+        _trayController.SetNullDrink();
+        SetPlayerDrinkUI();
+    }
+
+    public void SetPlayerDrinkUI()
+    {
+        _playerDrinkImage.sprite = _playerDrinkSprite[_trayController.denem2me()];
     }
 }

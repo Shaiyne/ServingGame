@@ -43,6 +43,8 @@ public class PlayerManager : MonoBehaviour
         InputSignals.Instance.onRunnerInputDragged += OnGetRunnerInputValues;
         InputSignals.Instance.onAnimationInputState += ToChangeAnimation;
         PlayerSignals.Instance.onCompareColor += CompareDrinkToRequest;
+        CoreGameSignals.Instance.onGamePause += GamePause;
+        CoreGameSignals.Instance.onGamePlay += GamePlay;
     }
 
     void DesubsribeEvents()
@@ -74,9 +76,20 @@ public class PlayerManager : MonoBehaviour
         _inputManager.GetPlayerState(playerAnimationStates);
     }
 
-    public void CompareDrinkToRequest(DrinkStates drinkStates)
+    public void CompareDrinkToRequest(GameObject customerObject)
     {
         //_trayController.CompareRequest(drinkStates);
-        _trayManager.CompareRequest(drinkStates);
+        _trayManager.CompareRequest(customerObject);
+        _trayManager.SetPlayerDrinkUI();
+    }
+
+    public void GamePause()
+    {
+        _playerController.DisableMovement();
+    }
+
+    public void GamePlay()
+    {
+        _playerController.EnableMovement();
     }
 }

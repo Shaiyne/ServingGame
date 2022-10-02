@@ -16,6 +16,7 @@ namespace Servingame.Controllers
         RotationMove _rotationMove;
         Rigidbody rb;
         [SerializeField]private bool _isReadyToPlay,_isReadyToMove=false;
+        [SerializeField] UpgradeData[] _levelData;
 
         public float HorizontalSpeed { get ; set ; }
         public float VerticalSpeed { get ; set ; }

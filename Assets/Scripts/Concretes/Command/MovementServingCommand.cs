@@ -14,10 +14,6 @@ public class MovementServingCommand : Movements
         }
         else
         {
-            //if (!Input.GetMouseButton(0))
-            //{
-            //    InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.ServingIdle);
-            //}
             MovementInputRelease(PlayerAnimationStates.ServingIdle);
         }
     }
