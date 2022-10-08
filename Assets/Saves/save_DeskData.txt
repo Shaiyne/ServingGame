@@ -1,0 +1,1 @@
+{"boughtAreaID":2}{"boughtAreaID":3}{"boughtAreaID":6}

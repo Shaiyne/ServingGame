@@ -7,7 +7,10 @@ public class UIScrollbar : MonoBehaviour
 {
     [SerializeField] public Scrollbar scrollbar;
 
-
+    private void OnEnable()
+    {
+        UISignals.Instance.onScrollbarFull += GetScrollbar;
+    }
     public void FillScrollbar(float fillSpeed)
     {
         scrollbar.size += fillSpeed * Time.deltaTime;
@@ -17,8 +20,9 @@ public class UIScrollbar : MonoBehaviour
     {
         if (scrollbar.size == 1)
         {
-            UISignals.Instance.onScrollbarFull.Invoke();
+            TraySignals.Instance.onCurrentScrollbarValue?.Invoke(scrollbar.size);
         }
+        
     }
 
     public void ResetScrollbar()

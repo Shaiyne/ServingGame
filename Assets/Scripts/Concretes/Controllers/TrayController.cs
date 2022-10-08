@@ -9,54 +9,26 @@ public class TrayController : MonoBehaviour , IDrink
     GameObject bottle;
     private int earnMoneyFromDrink;
     DrinkStates _currentColor;
-    private float _isFull;
-    ScrollbarSizeCommand scrollbarSizeCommand;
-    [SerializeField] private UIScrollbar _uiScrollbar;
+    private float _isScrollbarFull;
 
     public float RedDrink { get ; set ; }
     public float BlueDrink { get; set; }
     public float YellowDrink { get; set; }
     public float WhiteDrink { get; set; }
 
+
     private void Awake()
     {
         bottle = transform.GetChild(0).gameObject;
-        scrollbarSizeCommand = new ScrollbarSizeCommand(ref _uiScrollbar,this);
     }
-
+    private void OnEnable()
+    {
+        TraySignals.Instance.onCurrentScrollbarValue += GetCurrentScrollbarValue;
+    }
     public void TrayActiveOrDeactive(bool value)
     {
         bottle.SetActive(value);
     }
-
-    //public DrinkStates SetDrinkColor(string text)
-    //{
-    //    switch (text)
-    //    {
-    //        case "blue":
-    //            drinkMaterial.material.SetColor("_Color", Color.blue);
-    //            _currentColor = DrinkStates.Blue;
-    //            earnMoneyFromDrink = 15;
-    //            break;
-    //        case "red":
-    //            drinkMaterial.material.SetColor("_Color", Color.red);
-    //            _currentColor = DrinkStates.Red;
-    //            earnMoneyFromDrink = 20;
-    //            break;
-    //        case "yellow":
-    //            drinkMaterial.material.SetColor("_Color", Color.yellow);
-    //            _currentColor = DrinkStates.Yellow;
-    //            earnMoneyFromDrink = 25;
-    //            break;
-    //        case "white":
-    //            drinkMaterial.material.SetColor("_Color", Color.white);
-    //            _currentColor = DrinkStates.White;
-    //            earnMoneyFromDrink = 30;
-    //            break;
-    //    }
-
-    //    return _currentColor;
-    //}
 
     public void SetDrinkColor(string barrolColor)
     {
@@ -128,17 +100,23 @@ public class TrayController : MonoBehaviour , IDrink
 
     public void CheckRequest(GameObject customerObject)
     {
-        var scrollSize = scrollbarSizeCommand.Execute();
-        if (customerObject.transform.GetComponent<CustomerController>()._customerRequest == _currentColor && scrollSize==1)
+        var isFull = _isScrollbarFull;
+        if (customerObject.transform.GetComponent<CustomerController>()._customerRequest == _currentColor && isFull==1)
         {
             UISignals.Instance.onMoneyChange?.Invoke(earnMoneyFromDrink);
+            UpgradeSignals.Instance.onGetMoney?.Invoke(earnMoneyFromDrink);
             InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.Idle);
             UISignals.Instance.onResetScrollbar?.Invoke();
             UISignals.Instance.onActivenesScrollbar?.Invoke(false);
             SetNullDrink();
             TrayActiveOrDeactive(false);
-            CustomerSignals.Instance.onDestroyCustomer?.Invoke(customerObject.gameObject);
+            CustomerSignals.Instance.onDeactiveCustomer?.Invoke(customerObject.gameObject);
+            CustomerSignals.Instance.onDeskNull?.Invoke();
         }
+    }
+    private void GetCurrentScrollbarValue(float value)
+    {
+        _isScrollbarFull = value;
     }
 
     public void SetNullDrink()
@@ -156,8 +134,9 @@ public class TrayController : MonoBehaviour , IDrink
         return earnMoneyFromDrink;
     }
 
-    public int denem2me()
+    public int GetCurrentColor()
     {
         return ((int)_currentColor);
     }
+
 }

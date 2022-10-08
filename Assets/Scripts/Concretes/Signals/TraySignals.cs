@@ -10,5 +10,6 @@ public class TraySignals : Singleton<TraySignals>
     public UnityAction<string> onGetColor = delegate { };
     public UnityAction denemeTrayEvent = delegate { };
     public UnityAction onResetDrinkState = delegate { };
+    public UnityAction<float> onCurrentScrollbarValue = delegate { };
 
 }

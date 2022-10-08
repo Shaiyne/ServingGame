@@ -79,6 +79,6 @@ public class TrayManager : MonoBehaviour
 
     public void SetPlayerDrinkUI()
     {
-        _playerDrinkImage.sprite = _playerDrinkSprite[_trayController.denem2me()];
+        _playerDrinkImage.sprite = _playerDrinkSprite[_trayController.GetCurrentColor()];
     }
 }

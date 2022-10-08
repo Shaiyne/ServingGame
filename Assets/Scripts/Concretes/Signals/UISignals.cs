@@ -9,7 +9,7 @@ public class UISignals : Singleton<UISignals>
     public UnityAction onPlay = delegate { };
     public UnityAction onPause = delegate { };
     public UnityAction onQuit = delegate { };
-    public UnityAction onScrollbarFill = delegate { };
+    public UnityAction onScrollbarFillSpeed = delegate { };
     public UnityAction onScrollbarFull = delegate { };
     public UnityAction onResetScrollbar = delegate { };
     public UnityAction<bool> onActivenesScrollbar = delegate { };

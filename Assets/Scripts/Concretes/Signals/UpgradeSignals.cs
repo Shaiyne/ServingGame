@@ -9,4 +9,6 @@ public class UpgradeSignals : Singleton<UpgradeSignals>
     public UnityAction onUpgradeCustomerButton = delegate { };
     public UnityAction onUpgradeDrinkType= delegate { };
     public UnityAction onUpgradeScrollbar = delegate { };
+    public UnityAction<int> onGetMoney = delegate { };
+    public UnityAction<bool> onActivinessWall = delegate { };
 }

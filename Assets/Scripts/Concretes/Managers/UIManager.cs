@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameStates _gameStates; 
     [SerializeField] private Text MoneyText;
     [SerializeField] private GameObject MoneyUI;
-    [SerializeField] private GameObject _scrollbar;
     [SerializeField] private GameObject _upgradePanel;
 
     private void Awake()
@@ -30,11 +29,10 @@ public class UIManager : MonoBehaviour
 
     private void SubscribeEvent()
     {
-        UISignals.Instance.onMoneyChange += MoneyCollect;
+        UISignals.Instance.onMoneyChange += ChangeMoney;
         UISignals.Instance.onPlay += ShowExistMoney;
         UISignals.Instance.onActivenesScrollbar += ActivenesScrollbar;
-        UISignals.Instance.onScrollbarFill += ScrollbarFillSpeed;
-        UISignals.Instance.onScrollbarFull += IsScrollbarFull;
+        UISignals.Instance.onScrollbarFillSpeed += ScrollbarFillSpeed;
         UISignals.Instance.onResetScrollbar += ResetScrollbar;
         CoreGameSignals.Instance.onPlay += OnPlay;
         CoreGameSignals.Instance.onGamePause += OnGamePause;
@@ -42,7 +40,14 @@ public class UIManager : MonoBehaviour
     }
     private void DesubscribeEvent()
     {
-        UISignals.Instance.onMoneyChange -= MoneyCollect;
+        UISignals.Instance.onMoneyChange -= ChangeMoney;
+        UISignals.Instance.onPlay -= ShowExistMoney;
+        UISignals.Instance.onActivenesScrollbar -= ActivenesScrollbar;
+        UISignals.Instance.onScrollbarFillSpeed -= ScrollbarFillSpeed;
+        UISignals.Instance.onResetScrollbar -= ResetScrollbar;
+        CoreGameSignals.Instance.onPlay -= OnPlay;
+        CoreGameSignals.Instance.onGamePause -= OnGamePause;
+        UpgradeSignals.Instance.onUpgradePanelOpen -= OpenUpgradePanel;
     }
 
     private void OnPlay()
@@ -63,27 +68,29 @@ public class UIManager : MonoBehaviour
     {
         MoneyUI.gameObject.SetActive(false);
     }
-    public void MoneyCollect(int earningMoney)
-    {
-        _moneyController.EarningMoney(earningMoney);
-    }
 
-    private void SaveMoney(int value)
+    #region MoneyCodes
+    public void ChangeMoney(int value)
     {
         _moneyController.SaveMoney(value);
     }
 
     private void ShowExistMoney()
     {
-        MoneyText.text = " " + PlayerPrefs.GetInt("MoneyData");
+        MoneyText.text = " " + SaveSystem.LoadDataInt(SaveSystem.MoneyData);
     }
+
+    #endregion
+
+    #region ScrollbarCodes
+
     private void ActivenesScrollbar(bool value)
     {
         _uiScrollbar.ActivenesScrollbar(value);
     }
     private void ScrollbarFillSpeed()
     {
-        _uiScrollbar.FillScrollbar(UpgradeManager.Instance.upgrade.ScrollbarSpeed);
+        _uiScrollbar.FillScrollbar(SaveSystem.LoadDataFloat(SaveSystem.ScrollbarData));
     }
 
     private void IsScrollbarFull()
@@ -95,7 +102,9 @@ public class UIManager : MonoBehaviour
     {
         _uiScrollbar.ResetScrollbar();
     }
+    #endregion
 
+    #region UpgradeCodes
     private void OpenUpgradePanel()
     {
         _upgradePanel.SetActive(true);
@@ -118,4 +127,5 @@ public class UIManager : MonoBehaviour
     {
         UpgradeSignals.Instance.onUpgradeScrollbar?.Invoke();
     }
+    #endregion
 }

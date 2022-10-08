@@ -18,16 +18,21 @@ public class PlayerPhysicsController : MonoBehaviour
             UpgradeSignals.Instance.onUpgradePanelOpen?.Invoke();
             CoreGameSignals.Instance.onGamePause?.Invoke();
         }
+        else if(other.gameObject.layer == LayerMask.NameToLayer("upgradeRoomLayer"))
+        {
+            UpgradeSignals.Instance.onActivinessWall?.Invoke(false);
+        }
+
+
     }
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("barrolLayer"))
         {
             TraySignals.Instance.onGetColor?.Invoke(other.gameObject.name);
-            UISignals.Instance.onScrollbarFill?.Invoke();
+            UISignals.Instance.onScrollbarFillSpeed?.Invoke();
         }
-
-        else if(other.gameObject.layer == LayerMask.NameToLayer("buydeskLayer"))
+        else if (other.gameObject.layer == LayerMask.NameToLayer("buydeskLayer"))
         {
             BuySignals.Instance.onBuyDesk?.Invoke(other.gameObject);
         }
@@ -39,6 +44,10 @@ public class PlayerPhysicsController : MonoBehaviour
         {
             InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.ServingRunning);
             TraySignals.Instance.onSetTrayPosition?.Invoke(TrayStates.ServingState);
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("upgradeRoomLayer"))
+        {
+            UpgradeSignals.Instance.onActivinessWall?.Invoke(true);
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -54,18 +63,13 @@ public class PlayerPhysicsController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("customerTag"))
         {
+            UISignals.Instance.onScrollbarFull?.Invoke();
             PlayerSignals.Instance.onCompareColor?.Invoke(collision.gameObject);
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("customerTag")) 
-        //{
-        //    //InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.Idle);
-        //    //TraySignals.Instance.onTrayActive?.Invoke(false);
-            
-        //}
 
     }
 

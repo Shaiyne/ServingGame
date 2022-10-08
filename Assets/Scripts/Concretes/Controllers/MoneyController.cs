@@ -8,17 +8,17 @@ public class MoneyController : MonoBehaviour , IMoney
 
     private void Awake()
     {
-        Money = PlayerPrefs.GetInt("MoneyData");
+        Money = SaveSystem.LoadDataInt(SaveSystem.MoneyData);
     }
 
     public void SaveMoney(int value)
     {
-        PlayerPrefs.SetInt("MoneyData", value);
+        SaveSystem.SaveData(value, SaveSystem.MoneyData);
     }
 
-    public void EarningMoney(int value)
+    public void LoadMoney(int value)
     {
-        Money += value;
-        SaveMoney(Money);
+        SaveSystem.LoadDataInt(SaveSystem.MoneyData);
     }
+
 }

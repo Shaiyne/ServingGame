@@ -5,5 +5,6 @@ using UnityEngine.Events;
 
 public class CustomerSignals : Singleton<CustomerSignals>
 {
-    public UnityAction<GameObject> onDestroyCustomer = delegate { };
+    public UnityAction<GameObject> onDeactiveCustomer = delegate { };
+    public UnityAction onDeskNull = delegate { };
 }

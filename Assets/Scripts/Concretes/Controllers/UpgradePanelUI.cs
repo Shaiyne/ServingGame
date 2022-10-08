@@ -13,10 +13,10 @@ public class UpgradePanelUI : MonoBehaviour
 
     public void UpgradePanelMoneyShow()
     {
-        _upgradePanelMoneyText[0].text = "" + UpgradeManager.Instance.upgrade.CustomersCost;
-        _upgradePanelMoneyText[1].text = "" + UpgradeManager.Instance.upgrade.TypeOfDrinkCost;
-        _upgradePanelMoneyText[2].text = "" + UpgradeManager.Instance.upgrade.ScrollbarSpeedCost;
-        _upgradePanelMoneyText[3].text = "" + PlayerPrefs.GetInt("MoneyData");
+        _upgradePanelMoneyText[0].text = "" + SaveSystem.LoadDataInt(SaveSystem.CustomersCostData);
+        _upgradePanelMoneyText[1].text = "" + SaveSystem.LoadDataInt(SaveSystem.TypeDrinkCostData);
+        _upgradePanelMoneyText[2].text = "" + SaveSystem.LoadDataInt(SaveSystem.ScrollbarCostData);
+        _upgradePanelMoneyText[3].text = "" + SaveSystem.LoadDataInt(SaveSystem.MoneyData);
     }
 
 }
