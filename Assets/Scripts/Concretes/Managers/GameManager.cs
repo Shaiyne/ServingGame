@@ -5,10 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameStates _gameStates;
-    UpgradeData LevelData;
     private void Awake()
     {
-        GameOpen();
+        OnPlay();
+        //CoreGameSignals.Instance.onGamePlay?.Invoke();
     }
     private void OnEnable()
     {
@@ -23,15 +23,16 @@ public class GameManager : MonoBehaviour
     {
         if(_gameStates == GameStates.CanMoveSituation)
         {
-            CoreGameSignals.Instance.onPlay();
+            CoreGameSignals.Instance.onGamePlay();
         }
         else if(_gameStates == GameStates.CantMoveSituation)
         {
-            CoreGameSignals.Instance.onPause();
+            CoreGameSignals.Instance.onGamePause();
         }
     }
     private void SubscribeEvent()
     {
+        CoreGameSignals.Instance.onPlay += OnPlay;
         CoreGameSignals.Instance.onGamePlay += GameOpen;
         CoreGameSignals.Instance.onGamePause += GamePause;
     }
@@ -44,11 +45,22 @@ public class GameManager : MonoBehaviour
     private void GameOpen()
     {
         _gameStates = GameStates.CanMoveSituation;
+
     }
 
     private void GamePause()
     {
         _gameStates = GameStates.CantMoveSituation;
+    }
+
+    private void OnPlay()
+    {
+        CoreGameSignals.Instance.onPlay?.Invoke();
+    }
+    private void OnApplicationQuit()
+    {
+        CoreGameSignals.Instance.onPause?.Invoke();
+        CoreGameSignals.Instance.onQuit?.Invoke();
     }
 
 }

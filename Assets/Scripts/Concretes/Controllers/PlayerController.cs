@@ -1,5 +1,6 @@
 using Servingame.Abstracts.Controllers;
 using Servingame.Movements;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,6 @@ namespace Servingame.Controllers
         RotationMove _rotationMove;
         Rigidbody rb;
         [SerializeField]private bool _isReadyToPlay,_isReadyToMove=false;
-        [SerializeField] UpgradeData[] _levelData;
 
         public float HorizontalSpeed { get ; set ; }
         public float VerticalSpeed { get ; set ; }
@@ -30,6 +30,7 @@ namespace Servingame.Controllers
             rb = GetComponent<Rigidbody>();
             MoveSpeed = 5f;
         }
+
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
@@ -91,7 +92,6 @@ namespace Servingame.Controllers
             HorizontalSpeed = x;
             VerticalSpeed = z;
         }
-        
     }
 
 }

@@ -1,3 +1,5 @@
+using SaveLoadSystem;
+using Servingame.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text MoneyText;
     [SerializeField] private GameObject MoneyUI;
     [SerializeField] private GameObject _upgradePanel;
+    UpgradeData upgradeData = new UpgradeData();
 
     private void Awake()
     {
@@ -34,7 +37,8 @@ public class UIManager : MonoBehaviour
         UISignals.Instance.onActivenesScrollbar += ActivenesScrollbar;
         UISignals.Instance.onScrollbarFillSpeed += ScrollbarFillSpeed;
         UISignals.Instance.onResetScrollbar += ResetScrollbar;
-        CoreGameSignals.Instance.onPlay += OnPlay;
+        CoreGameSignals.Instance.onPlay += onPlay;
+        CoreGameSignals.Instance.onGamePlay += OnGamePlay;
         CoreGameSignals.Instance.onGamePause += OnGamePause;
         UpgradeSignals.Instance.onUpgradePanelOpen += OpenUpgradePanel;
     }
@@ -45,26 +49,28 @@ public class UIManager : MonoBehaviour
         UISignals.Instance.onActivenesScrollbar -= ActivenesScrollbar;
         UISignals.Instance.onScrollbarFillSpeed -= ScrollbarFillSpeed;
         UISignals.Instance.onResetScrollbar -= ResetScrollbar;
-        CoreGameSignals.Instance.onPlay -= OnPlay;
+        CoreGameSignals.Instance.onPlay -= onPlay;
+        CoreGameSignals.Instance.onGamePlay -= OnGamePlay;
         CoreGameSignals.Instance.onGamePause -= OnGamePause;
         UpgradeSignals.Instance.onUpgradePanelOpen -= OpenUpgradePanel;
     }
 
-    private void OnPlay()
+    private void onPlay()
     {
         ShowExistMoney();
-        PlayState();
+        OnGamePlay();
     }
 
-    private void OnGamePause()
+    private void OnPause()
     {
-        PauseStage();
+        OnGamePause();
     }
-    private void PlayState()
+    private void OnGamePlay()
     {
         MoneyUI.gameObject.SetActive(true);
+        ShowExistMoney();
     }
-    private void PauseStage()
+    private void OnGamePause()
     {
         MoneyUI.gameObject.SetActive(false);
     }
@@ -77,7 +83,7 @@ public class UIManager : MonoBehaviour
 
     private void ShowExistMoney()
     {
-        MoneyText.text = " " + SaveSystem.LoadDataInt(SaveSystem.MoneyData);
+        MoneyText.text = " " + _moneyController.LoadMoney();
     }
 
     #endregion
@@ -90,7 +96,8 @@ public class UIManager : MonoBehaviour
     }
     private void ScrollbarFillSpeed()
     {
-        _uiScrollbar.FillScrollbar(SaveSystem.LoadDataFloat(SaveSystem.ScrollbarData));
+        upgradeData = SaveGameManager.CurrentSaveData.UpgradeData;
+        _uiScrollbar.FillScrollbar(upgradeData.ScrollbarSpeed);
     }
 
     private void IsScrollbarFull()

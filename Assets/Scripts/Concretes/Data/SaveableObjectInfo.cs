@@ -6,20 +6,22 @@ public class SaveableObjectInfo : MonoBehaviour
 {
     public int ID;
     [SerializeField]public int BuyDeskCost;
+    public int CostPerSecond;
 
     [SerializeField] TextMeshProUGUI DeskCost ;
 
     private void Awake()
     {
+        CostPerSecond = BuyDeskCost / 4;
         DeskCost.text = "Desk purchase cost = " + BuyDeskCost + ". Wait 2 second to buy"; ;
     }
-    private void OnEnable()
+
+    public void CurrentBuyDeskCost()
     {
-        BuySignals.Instance.onCost += CurrentBuyDeskCost;
-    }
-    private void CurrentBuyDeskCost(int value)
-    {
-        BuyDeskCost -= value;
+        if (this.BuyDeskCost >= 0)
+        {
+            this.BuyDeskCost -= CostPerSecond;
+        }
     }
 
 }

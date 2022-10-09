@@ -55,7 +55,6 @@ MonoBehaviour:
   _gameStates: 0
   MoneyText: {fileID: 2699568686686395067}
   MoneyUI: {fileID: 2699568687041593363}
-  _scrollbar: {fileID: 2699568686709778723}
   _upgradePanel: {fileID: 2699568685326723526}
 --- !u!114 &2699568684966459442
 MonoBehaviour:

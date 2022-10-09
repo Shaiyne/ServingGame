@@ -1,3 +1,5 @@
+using SaveLoadSystem;
+using Servingame.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +8,7 @@ public class BuyDeskManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] unitGameObject;
     float timer = 0;
-    int costPerSecond = 50;
+    DeskData _deskData = new DeskData();
 
     private void Awake()
     {
@@ -22,21 +24,22 @@ public class BuyDeskManager : MonoBehaviour
     {
         if (timer >= 0.6f)
         {
-            BuySignals.Instance.onCost?.Invoke(costPerSecond);
-            UISignals.Instance.onMoneyChange(-costPerSecond);
-            if (deskObject.transform.GetComponent<SaveableObjectInfo>().BuyDeskCost <= 0)
+            if (deskObject.transform.GetComponent<SaveableObjectInfo>().BuyDeskCost == 0)
             {
-                deskObject.transform.GetChild(0).transform.gameObject.SetActive(true);
-                deskObject.transform.GetChild(0).transform.position = new Vector3(deskObject.transform.position.x, 0, deskObject.transform.position.z);
+                LoadDesk(deskObject);
                 BuySignals.Instance.onSaveDesk?.Invoke(deskObject);
-                Destroy(deskObject.transform.GetChild(1).gameObject);
-                //UISignals.Instance.onMoneyChange?.Invoke(-deskObject.transform.GetComponent<SaveableObjectInfo>().BuyDeskCost);
-                deskObject.layer = default;
+                SaveDesks(deskObject);
+                SaveGameManager.CurrentSaveData.DeskData = _deskData;
+                SaveGameManager.SaveGame();
+            }
+            else if (SaveGameManager.CurrentSaveData.MoneyData.Money > 0)
+            {
+                deskObject.GetComponent<SaveableObjectInfo>().CurrentBuyDeskCost();
+                UISignals.Instance.onMoneyChange(-deskObject.transform.GetComponent<SaveableObjectInfo>().CostPerSecond);
             }
             timer = 0;
-            
         }
-        else if (timer <= 0.6f)
+        else if (timer <= 0.6f) 
         {
             timer += Time.deltaTime;
         }
@@ -47,50 +50,41 @@ public class BuyDeskManager : MonoBehaviour
     {
         deskObject.transform.GetChild(0).transform.gameObject.SetActive(true);
         deskObject.transform.GetChild(0).transform.position = new Vector3(deskObject.transform.position.x, 0.1f, deskObject.transform.position.z);
-        SetLayer(deskObject);
         Destroy(deskObject.transform.GetChild(1).gameObject);
+        SetLayer(deskObject);
     }
 
+    private void SaveDesks(GameObject deskObject)
+    {
+        _deskData.DeskID.Add(deskObject.transform.GetComponent<SaveableObjectInfo>().ID); 
+    }
     private void LoadDesks()
     {
-        // Load
-
-        string saveString = SaveSystem.GetData(SaveSystem.BoughtDeskData);
-
-        if (saveString != null)
+        _deskData = SaveGameManager.CurrentSaveData.DeskData;
+        foreach (int item in _deskData.DeskID)
         {
-            char[] separatores = { ',', ';', '|', '{', '}', ':' };
-            string[] strValues = saveString.Split(separatores);
-            List<int> IDlist = new List<int>();
-            string ass = saveString.ToString();
-            foreach (string str in strValues)
+            for (int i = 0; i < unitGameObject.Length; i++)
             {
-                int val = 0;
-                if (int.TryParse(str, out val))
+                if (item == unitGameObject[i].GetComponent<SaveableObjectInfo>().ID)
                 {
-                    IDlist.Add(val);
+                    LoadDesk(unitGameObject[i].gameObject);
+                    SetLayer(unitGameObject[i].gameObject);
                 }
             }
-            foreach (int item in IDlist)
-            {
-                for (int i = 0; i < unitGameObject.Length; i++)
-                {
-                    if (item == unitGameObject[i].GetComponent<SaveableObjectInfo>().ID)
-                    {
-                        LoadDesk(unitGameObject[i].gameObject);
-                        SetLayer(unitGameObject[i].gameObject);
-                    }
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("nothing awake");
         }
     }
 
     private void SetLayer(GameObject go)
     {
         go.layer = default;
+    }
+}
+
+namespace Servingame.Managers
+{
+    [System.Serializable]
+    public struct DeskData
+    {
+        public List<int> DeskID;
     }
 }

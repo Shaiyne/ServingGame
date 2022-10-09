@@ -9,21 +9,17 @@ public class PlayerManager : MonoBehaviour
     public GameStates CurrentGameStates;
     PlayerAnimationController _playerAnimationController;
     InputManager _inputManager;
-    TrayController _trayController;
     TrayManager _trayManager;
-
+    PlayerSaveData _playerSaveData;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _playerAnimationController = GetComponent<PlayerAnimationController>();
         _inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-        _trayController = GameObject.Find("TrayManager").GetComponent<TrayController>();
         _trayManager = GameObject.Find("TrayManager").GetComponent<TrayManager>();
+        _playerSaveData = GetComponent<PlayerSaveData>();
     }
 
-    private void FixedUpdate()
-    {
-    }
     private void OnEnable()
     {
         SubscribeEvents();
@@ -43,8 +39,11 @@ public class PlayerManager : MonoBehaviour
         InputSignals.Instance.onRunnerInputDragged += OnGetRunnerInputValues;
         InputSignals.Instance.onAnimationInputState += ToChangeAnimation;
         PlayerSignals.Instance.onCompareColor += CompareDrinkToRequest;
-        CoreGameSignals.Instance.onGamePause += GamePause;
-        CoreGameSignals.Instance.onGamePlay += GamePlay;
+        CoreGameSignals.Instance.onPlay += onPlay;
+        CoreGameSignals.Instance.onGamePlay += onActiveMovement;
+        CoreGameSignals.Instance.onGamePause += onDeactiveMovement;
+        CoreGameSignals.Instance.onPause += OnPause;
+        CoreGameSignals.Instance.onQuit += OnQuit;
     }
 
     void DesubsribeEvents()
@@ -53,6 +52,9 @@ public class PlayerManager : MonoBehaviour
         InputSignals.Instance.onRunnerInputDragged -= OnGetRunnerInputValues;
         InputSignals.Instance.onAnimationInputState -= ToChangeAnimation;
         PlayerSignals.Instance.onCompareColor -= CompareDrinkToRequest;
+        CoreGameSignals.Instance.onGamePlay -= onPlay;
+        CoreGameSignals.Instance.onGamePause -= OnPause;
+        CoreGameSignals.Instance.onGameQuit -= OnQuit;
     }
     private void onActiveMovement()
     {
@@ -82,14 +84,21 @@ public class PlayerManager : MonoBehaviour
         _trayManager.CompareRequest(customerObject);
         _trayManager.SetPlayerDrinkUI();
     }
-
-    public void GamePause()
-    {
-        _playerController.DisableMovement();
-    }
-
-    public void GamePlay()
+    public void onPlay()
     {
         _playerController.EnableMovement();
+        _playerSaveData.LoadPlayerTransform();
+    }
+
+    public void OnPause()
+    {
+        _playerController.DisableMovement();
+        _playerSaveData.SavePlayerTransform();
+    }
+
+
+    public void OnQuit()
+    {
+        _playerSaveData.SavePlayerTransform();
     }
 }

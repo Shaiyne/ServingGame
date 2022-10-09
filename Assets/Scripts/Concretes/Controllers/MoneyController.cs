@@ -1,24 +1,42 @@
+using SaveLoadSystem;
+using Servingame.Controllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoneyController : MonoBehaviour , IMoney
+public class MoneyController : MonoBehaviour 
 {
-    public int Money { get; set ; }
+    MoneyData MoneyData = new MoneyData();
 
     private void Awake()
     {
-        Money = SaveSystem.LoadDataInt(SaveSystem.MoneyData);
+        MoneyData.Money = LoadMoney();
+    }
+    private void Start()
+    {
+        
     }
 
     public void SaveMoney(int value)
     {
-        SaveSystem.SaveData(value, SaveSystem.MoneyData);
+        MoneyData.Money = MoneyData.Money + value;
+        SaveGameManager.CurrentSaveData.MoneyData = MoneyData;
     }
 
-    public void LoadMoney(int value)
+    public int LoadMoney()
     {
-        SaveSystem.LoadDataInt(SaveSystem.MoneyData);
+        MoneyData = SaveGameManager.CurrentSaveData.MoneyData;
+        return MoneyData.Money;
+    }
+
+}
+
+namespace Servingame.Controllers
+{
+    [System.Serializable]
+    public struct MoneyData
+    {
+        public int Money;
     }
 
 }

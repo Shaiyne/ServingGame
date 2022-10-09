@@ -9,14 +9,12 @@ public class TrayManager : MonoBehaviour
     [SerializeField] private Vector3 servingTrayPosition;
     public DrinkStates _drinkStates;
     TrayController _trayController;
-    UIScrollbar _uiScrollbar;
     [SerializeField] private Sprite[] _playerDrinkSprite;
     [SerializeField] private Image _playerDrinkImage;
 
     private void Awake()
     {
         _trayController = GetComponent<TrayController>();
-        _uiScrollbar = GameObject.Find("UIManager").GetComponentInChildren<UIScrollbar>();
     }
 
     private void OnEnable()
