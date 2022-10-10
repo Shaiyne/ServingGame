@@ -96,7 +96,7 @@
     <Compile Include="Assets\Scripts\Concretes\Enums\PlayerAnimationStates.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\GameManager.cs" />
-    <Compile Include="Assets\saved\SaveGameManager.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Managers\SaveGameManager.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Concretes\Enums\GameStates.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
@@ -117,12 +117,11 @@
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\InputManager.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Inputs\IInputReader.cs" />
-    <Compile Include="Assets\Assets\Mini Toon Office\Readme\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Concretes\Command\ScrollbarSizeCommand.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\PlayerPhysicsController.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\TrayController.cs" />
-    <Compile Include="Assets\saved\SaveData.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Data\SaveData.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Concretes\Command\MovementFillUpCommand.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
@@ -131,7 +130,7 @@
     <Compile Include="Assets\Scripts\Concretes\Enums\RunnerInputParams.cs" />
     <Compile Include="Assets\Scripts\Concretes\Movements\VerticalMove.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
-    <Compile Include="Assets\saved\PlayerSaveData.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Data\PlayerSaveData.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\MoneyController.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\UIManager.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -141,6 +140,8 @@
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Managers\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Data\Sound.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\TextMesh Pro\Shaders\TMPro.cginc" />

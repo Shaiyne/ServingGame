@@ -1,3 +1,5 @@
+using SaveLoadSystem;
+using Servingame.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +8,7 @@ using UnityEngine.UI;
 public class TrayController : MonoBehaviour , IDrink
 {
     [SerializeField] private Renderer drinkMaterial;
+    UpgradeData upgradeData = new UpgradeData();
     GameObject bottle;
     private int earnMoneyFromDrink;
     DrinkStates _currentColor;
@@ -32,30 +35,31 @@ public class TrayController : MonoBehaviour , IDrink
 
     public void SetDrinkColor(string barrolColor)
     {
+        upgradeData = SaveGameManager.CurrentSaveData.UpgradeData;
         switch (barrolColor)
         {
             case "blue":
                 drinkMaterial.material.SetColor("_Color", Color.blue);
                 _currentColor = DrinkStates.Blue;
-                BlueDrink += 20 * Time.deltaTime;
+                BlueDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
                 earnMoneyFromDrink = 15;
                 break;
             case "red":
                 drinkMaterial.material.SetColor("_Color", Color.red);
                 _currentColor = DrinkStates.Red;
-                RedDrink += 20 * Time.deltaTime;
+                RedDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
                 earnMoneyFromDrink = 20;
                 break;
             case "yellow":
                 drinkMaterial.material.SetColor("_Color", Color.yellow);
                 _currentColor = DrinkStates.Yellow;
-                YellowDrink += 20 * Time.deltaTime;
+                YellowDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
                 earnMoneyFromDrink = 25;
                 break;
             case "white":
                 drinkMaterial.material.SetColor("_Color", Color.white);
                 _currentColor = DrinkStates.White;
-                WhiteDrink += 20 * Time.deltaTime;
+                WhiteDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
                 earnMoneyFromDrink = 30;
                 break;
         }
@@ -112,6 +116,7 @@ public class TrayController : MonoBehaviour , IDrink
             TrayActiveOrDeactive(false);
             CustomerSignals.Instance.onDeactiveCustomer?.Invoke(customerObject.gameObject);
             CustomerSignals.Instance.onDeskNull?.Invoke();
+            FindObjectOfType<AudioManager>().Play("OrderCompleteSound");
         }
     }
     private void GetCurrentScrollbarValue(float value)

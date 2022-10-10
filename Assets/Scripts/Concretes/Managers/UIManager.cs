@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text MoneyText;
     [SerializeField] private GameObject MoneyUI;
     [SerializeField] private GameObject _upgradePanel;
+    [SerializeField] private GameObject colorMixedInformationPanel;
     UpgradeData upgradeData = new UpgradeData();
 
     private void Awake()
@@ -135,4 +136,12 @@ public class UIManager : MonoBehaviour
         UpgradeSignals.Instance.onUpgradeScrollbar?.Invoke();
     }
     #endregion
+
+
+    public void ColorMixInformationPanel(bool value)
+    {
+        if (value) CoreGameSignals.Instance.onGamePause?.Invoke();
+        else CoreGameSignals.Instance.onGamePlay?.Invoke();
+        colorMixedInformationPanel.SetActive(value);
+    }
 }

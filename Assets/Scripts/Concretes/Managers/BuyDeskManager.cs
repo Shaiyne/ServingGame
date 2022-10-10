@@ -32,7 +32,7 @@ public class BuyDeskManager : MonoBehaviour
                 SaveGameManager.CurrentSaveData.DeskData = _deskData;
                 SaveGameManager.SaveGame();
             }
-            else if (SaveGameManager.CurrentSaveData.MoneyData.Money > 0)
+            else if (SaveGameManager.CurrentSaveData.MoneyData.Money >= deskObject.GetComponent<SaveableObjectInfo>().CostPerSecond)
             {
                 deskObject.GetComponent<SaveableObjectInfo>().CurrentBuyDeskCost();
                 UISignals.Instance.onMoneyChange(-deskObject.transform.GetComponent<SaveableObjectInfo>().CostPerSecond);

@@ -13,6 +13,7 @@ public class CustomerController : MonoBehaviour
     {
         _upgradeData.TypeDrinkSize = SaveGameManager.CurrentSaveData.UpgradeData.TypeDrinkSize;
         _customerRequest = (DrinkStates)Random.Range(1, _upgradeData.TypeDrinkSize + 1); //Null var o yüzden +1
+        FindObjectOfType<AudioManager>().Play("OrderSound");
     }
 
 }
