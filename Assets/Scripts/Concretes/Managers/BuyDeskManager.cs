@@ -9,6 +9,7 @@ public class BuyDeskManager : MonoBehaviour
     [SerializeField] private GameObject[] unitGameObject;
     float timer = 0;
     DeskData _deskData = new DeskData();
+    
 
     private void Awake()
     {

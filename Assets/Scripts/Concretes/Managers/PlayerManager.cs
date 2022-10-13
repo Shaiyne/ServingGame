@@ -7,14 +7,14 @@ public class PlayerManager : MonoBehaviour
 {
     PlayerController _playerController;
     public GameStates CurrentGameStates;
-    PlayerAnimationController _playerAnimationController;
+    AnimationController _playerAnimationController;
     InputManager _inputManager;
     TrayManager _trayManager;
     PlayerSaveData _playerSaveData;
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
-        _playerAnimationController = GetComponent<PlayerAnimationController>();
+        _playerAnimationController = GetComponent<AnimationController>();
         _inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         _trayManager = GameObject.Find("TrayManager").GetComponent<TrayManager>();
         _playerSaveData = GetComponent<PlayerSaveData>();
@@ -80,7 +80,6 @@ public class PlayerManager : MonoBehaviour
 
     public void CompareDrinkToRequest(GameObject customerObject)
     {
-        //_trayController.CompareRequest(drinkStates);
         _trayManager.CompareRequest(customerObject);
         _trayManager.SetPlayerDrinkUI();
     }

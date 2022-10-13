@@ -45,7 +45,7 @@ namespace Servingame.Managers
             else if (_upgradeData.CustomerCost <= _moneyData.Money)
             {
                 UISignals.Instance.onMoneyChange?.Invoke(-_upgradeData.CustomerCost);
-                _moneyData.Money -= _upgradeData.TypeDrinkCost;
+                _moneyData.Money -= _upgradeData.CustomerCost;
                 _upgradeData.CustomerSize += 1;
                 _upgradeData.CustomerCost = _upgradeData.CustomerSize * 100;
                 SaveCurrentData();
@@ -78,7 +78,7 @@ namespace Servingame.Managers
             else if (_upgradeData.ScrollbarSpeedCost <= _moneyData.Money)
             {
                 UISignals.Instance.onMoneyChange?.Invoke(-_upgradeData.ScrollbarSpeedCost);
-                _moneyData.Money -= _upgradeData.TypeDrinkCost;
+                _moneyData.Money -= _upgradeData.ScrollbarSpeedCost;
                 _upgradeData.ScrollbarSpeed += 0.1f;
                 _upgradeData.ScrollbarSpeedCost = (int)(_upgradeData.ScrollbarSpeed * 1000);
                 SaveCurrentData();

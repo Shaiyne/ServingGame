@@ -8,12 +8,17 @@ public class CustomerController : MonoBehaviour
 {
     public DrinkStates _customerRequest;
     UpgradeData _upgradeData = new UpgradeData();
+    public bool customerBool;
+    [SerializeField] CustomerRequestUI _customerRequestUI;
 
     private void OnEnable()
     {
+        customerBool = false;
+        FindObjectOfType<AudioManager>().Play("OrderSound");
         _upgradeData.TypeDrinkSize = SaveGameManager.CurrentSaveData.UpgradeData.TypeDrinkSize;
         _customerRequest = (DrinkStates)Random.Range(1, _upgradeData.TypeDrinkSize + 1); //Null var o yüzden +1
-        FindObjectOfType<AudioManager>().Play("OrderSound");
+        _customerRequestUI.SetRequestUI(_customerRequest);
     }
+
 
 }

@@ -1227,6 +1227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5980926255899608714}
   - component: {fileID: 2522484456797205080}
+  - component: {fileID: 6840068762390075937}
   m_Layer: 0
   m_Name: RequestBottle
   m_TagString: Untagged
@@ -1300,6 +1301,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6840068762390075937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311043096763926400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2c3e373b5c72a48815ff0e32cc999e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 2522484456797205080}
+  sprites:
+  - {fileID: 21300000, guid: 84fe101cd8bcee2429e1a0f435cfd53c, type: 3}
+  - {fileID: 21300000, guid: a4eafeda0dd59e345b28bd56dfd79926, type: 3}
+  - {fileID: 21300000, guid: 574f9fcea1cd1bd4094c7b465fc93590, type: 3}
+  - {fileID: 21300000, guid: a0717740518486b4aab8c103ab71dd82, type: 3}
+  - {fileID: 21300000, guid: d4229df33f16e0246beb39a060b673c7, type: 3}
+  - {fileID: 21300000, guid: 3a146a2320e314c48af0c2b6b9c760d7, type: 3}
+  - {fileID: 21300000, guid: aa5840e207f92074b890990f181c4493, type: 3}
+  - {fileID: 21300000, guid: b3e0642d78056d946a80c1b9e3125e76, type: 3}
 --- !u!1 &5333746463392559924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,6 +1794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _customerRequest: 0
+  customerBool: 0
+  _customerRequestUI: {fileID: 6840068762390075937}
 --- !u!136 &5834283811509944889
 CapsuleCollider:
   m_ObjectHideFlags: 0

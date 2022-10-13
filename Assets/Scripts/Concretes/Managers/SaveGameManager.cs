@@ -36,7 +36,9 @@ namespace SaveLoadSystem
                 CurrentSaveData.UpgradeData.CustomerCost = 100;
                 CurrentSaveData.UpgradeData.TypeDrinkCost = 300;
                 CurrentSaveData.UpgradeData.ScrollbarSpeedCost = 100;
-                CurrentSaveData.MoneyData.Money = 1000;
+                CurrentSaveData.MoneyData.Money = 10000;
+                CurrentSaveData.HRData.EmployeeBuyCost = 300;
+                CurrentSaveData.HRData.EmployeeID = null;
             }
             string json = JsonUtility.ToJson(CurrentSaveData, true);
             File.WriteAllText(dir + FileName, json);

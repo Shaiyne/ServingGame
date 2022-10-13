@@ -11,10 +11,11 @@ public class UIManager : MonoBehaviour
     UIScrollbar _uiScrollbar;
     [SerializeField] GameStates _gameStates; 
     [SerializeField] private Text MoneyText;
-    [SerializeField] private GameObject MoneyUI;
+    [SerializeField] private GameObject _moneyUI;
     [SerializeField] private GameObject _upgradePanel;
     [SerializeField] private GameObject colorMixedInformationPanel;
     UpgradeData upgradeData = new UpgradeData();
+    [SerializeField] private GameObject _hrPanel;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class UIManager : MonoBehaviour
         CoreGameSignals.Instance.onGamePlay += OnGamePlay;
         CoreGameSignals.Instance.onGamePause += OnGamePause;
         UpgradeSignals.Instance.onUpgradePanelOpen += OpenUpgradePanel;
+        HRSignals.Instance.onHrPanelOpen += OpenHRPanel;
     }
     private void DesubscribeEvent()
     {
@@ -54,6 +56,7 @@ public class UIManager : MonoBehaviour
         CoreGameSignals.Instance.onGamePlay -= OnGamePlay;
         CoreGameSignals.Instance.onGamePause -= OnGamePause;
         UpgradeSignals.Instance.onUpgradePanelOpen -= OpenUpgradePanel;
+        HRSignals.Instance.onHrPanelOpen -= OpenHRPanel;
     }
 
     private void onPlay()
@@ -68,12 +71,12 @@ public class UIManager : MonoBehaviour
     }
     private void OnGamePlay()
     {
-        MoneyUI.gameObject.SetActive(true);
+        _moneyUI.gameObject.SetActive(true);
         ShowExistMoney();
     }
     private void OnGamePause()
     {
-        MoneyUI.gameObject.SetActive(false);
+        _moneyUI.gameObject.SetActive(false);
     }
 
     #region MoneyCodes
@@ -137,11 +140,28 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-
+    #region InformationPanelCodes
     public void ColorMixInformationPanel(bool value)
     {
         if (value) CoreGameSignals.Instance.onGamePause?.Invoke();
         else CoreGameSignals.Instance.onGamePlay?.Invoke();
         colorMixedInformationPanel.SetActive(value);
     }
+    #endregion
+
+    #region HRCodes
+    public void OpenHRPanel()
+    {
+        _hrPanel.SetActive(true);
+    }
+    public void CloseHRPanel()
+    {
+        _hrPanel.SetActive(false);
+        CoreGameSignals.Instance.onGamePlay?.Invoke();
+    }
+    public void HRHireButton()
+    {
+        HRSignals.Instance.onHireButton?.Invoke();
+    }
+    #endregion
 }

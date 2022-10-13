@@ -9,6 +9,10 @@ public class CustomerManager : MonoBehaviour
     [SerializeField] GameObject[] _customers;
     UpgradeData upgradeData = new UpgradeData();
 
+    private void Awake()
+    {
+        SetAvaibleCustomers();
+    }
     private void OnEnable()
     {
         CustomerSignals.Instance.onDeactiveCustomer += DeactiveCustomer;
@@ -21,7 +25,7 @@ public class CustomerManager : MonoBehaviour
     }
     private void Start()
     {
-        SetAvaibleCustomers();
+        //SetAvaibleCustomers();
     }
 
     public void SetAvaibleCustomers()
@@ -58,7 +62,9 @@ public class CustomerManager : MonoBehaviour
 
     IEnumerator SetActiveCustomerWait()
     {
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(20);
         SetAvaibleCustomers();
+        EmployeeSignals.Instance.onCheckNewMission?.Invoke();
     }
+
 }

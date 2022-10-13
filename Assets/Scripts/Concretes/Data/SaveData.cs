@@ -18,6 +18,8 @@ namespace SaveLoadSystem
         public MoneyData MoneyData = new MoneyData();
 
         public DeskData DeskData = new DeskData();
+
+        public HRData HRData = new HRData();
     }
 
 }

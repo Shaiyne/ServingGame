@@ -55,26 +55,32 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Abstracts\UI\ICustomerDialogueCreator.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Controllers\IMoney.cs" />
+    <Compile Include="Assets\Scripts\Abstracts\Controllers\ICustomerRequestUI.cs" />
     <Compile Include="Assets\Scripts\Concretes\Enums\DrinkStates.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\Scripts\Concretes\Inputs\InputReader.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\UpgradeManager.cs" />
     <Compile Include="Assets\Scripts\Concretes\Movements\PlayerMovements.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Ai\EmployeeSignals.cs" />
     <Compile Include="Assets\Scripts\Concretes\Singleton\Singleton.cs" />
     <Compile Include="Assets\Scripts\Concretes\Command\MovementServingCommand.cs" />
     <Compile Include="Assets\Scripts\Concretes\Command\MovementEmptyCommand.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Data\HRData.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Controllers\IDrink.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\BuyDeskManager.cs" />
     <Compile Include="Assets\Scripts\Concretes\Signals\InputSignals.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Ai\Employee.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\TrayManager.cs" />
     <Compile Include="Assets\Scripts\Concretes\Signals\CustomerSignals.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\CustomerController.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Managers\AudioManager.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Controllers\IEntityController.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Managers\HRManager.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\Concretes\Data\SaveableObjectInfo.cs" />
     <Compile Include="Assets\Scripts\Concretes\Signals\PlayerSignals.cs" />
@@ -84,7 +90,7 @@
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Movement\IMovement.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
-    <Compile Include="Assets\Scripts\Concretes\Controllers\PlayerAnimationController.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Controllers\AnimationController.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
@@ -99,6 +105,7 @@
     <Compile Include="Assets\Scripts\Concretes\Managers\SaveGameManager.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Concretes\Enums\GameStates.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Managers\NavMeshBakerManager.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Concretes\Enums\TrayStates.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
@@ -106,7 +113,7 @@
     <Compile Include="Assets\Scripts\Concretes\Controllers\UpgradePanelUI.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\Concretes\Movements\HorizontalMove.cs" />
-    <Compile Include="Assets\Scripts\Concretes\Controllers\UpgradeController.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Controllers\RoomController.cs" />
     <Compile Include="Assets\Scripts\Concretes\Inputs\TouchControls.cs" />
     <Compile Include="Assets\Scripts\Concretes\Signals\UISignals.cs" />
     <Compile Include="Assets\Scripts\Concretes\Signals\TraySignals.cs" />
@@ -114,8 +121,10 @@
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Concretes\Signals\UpgradeSignals.cs" />
+    <Compile Include="Assets\Ai\EmployeePhysicsController.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Signals\RoomSignals.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Inputs\IInputReader.cs" />
     <Compile Include="Assets\Scripts\Concretes\Command\ScrollbarSizeCommand.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
@@ -124,24 +133,26 @@
     <Compile Include="Assets\Scripts\Concretes\Data\SaveData.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Concretes\Command\MovementFillUpCommand.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Controllers\CustomerRequestUI.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\Concretes\Signals\CoreGameSignals.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Signals\HRSignals.cs" />
     <Compile Include="Assets\Scripts\Concretes\Enums\RunnerInputParams.cs" />
     <Compile Include="Assets\Scripts\Concretes\Movements\VerticalMove.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\Concretes\Data\PlayerSaveData.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\MoneyController.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Concretes\Controllers\HRPanelUI.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\CustomerManager.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
-    <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Scripts\Concretes\Managers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Concretes\Data\Sound.cs" />
+    <Compile Include="Assets\Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -813,6 +824,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{208675D5-854D-6404-547F-3E98AD4D4955}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{06B69468-EA35-4B89-B0C4-C1EFD3285317}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

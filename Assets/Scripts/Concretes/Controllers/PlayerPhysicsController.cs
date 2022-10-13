@@ -18,12 +18,19 @@ public class PlayerPhysicsController : MonoBehaviour
             UpgradeSignals.Instance.onUpgradePanelOpen?.Invoke();
             CoreGameSignals.Instance.onGamePause?.Invoke();
         }
+        else if (other.gameObject.CompareTag("hrTag"))
+        {
+            HRSignals.Instance.onHrPanelOpen?.Invoke();
+            CoreGameSignals.Instance.onGamePause?.Invoke();
+        }
         else if(other.gameObject.layer == LayerMask.NameToLayer("upgradeRoomLayer"))
         {
-            UpgradeSignals.Instance.onActivinessWall?.Invoke(false);
+            RoomSignals.Instance.onActivinessWall?.Invoke(false);
         }
-
-
+        else if (other.gameObject.layer == LayerMask.NameToLayer("hrRoomLayer"))
+        {
+            RoomSignals.Instance.onActivinessWall?.Invoke(false);
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -47,7 +54,11 @@ public class PlayerPhysicsController : MonoBehaviour
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("upgradeRoomLayer"))
         {
-            UpgradeSignals.Instance.onActivinessWall?.Invoke(true);
+            RoomSignals.Instance.onActivinessWall?.Invoke(true);
+        }
+        else if(other.gameObject.layer == LayerMask.NameToLayer("hrRoomLayer"))
+        {
+            RoomSignals.Instance.onActivinessWall?.Invoke(true);
         }
     }
     private void OnCollisionEnter(Collision collision)
