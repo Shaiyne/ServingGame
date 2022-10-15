@@ -62,17 +62,21 @@ public class BuyDeskManager : MonoBehaviour
     private void LoadDesks()
     {
         _deskData = SaveGameManager.CurrentSaveData.DeskData;
-        foreach (int item in _deskData.DeskID)
+        if (_deskData.DeskID.Count != 0)
         {
-            for (int i = 0; i < unitGameObject.Length; i++)
+            foreach (int item in _deskData.DeskID)
             {
-                if (item == unitGameObject[i].GetComponent<SaveableObjectInfo>().ID)
+                for (int i = 0; i < unitGameObject.Length; i++)
                 {
-                    LoadDesk(unitGameObject[i].gameObject);
-                    SetLayer(unitGameObject[i].gameObject);
+                    if (item == unitGameObject[i].GetComponent<SaveableObjectInfo>().ID)
+                    {
+                        LoadDesk(unitGameObject[i].gameObject);
+                        SetLayer(unitGameObject[i].gameObject);
+                    }
                 }
             }
         }
+
     }
 
     private void SetLayer(GameObject go)
