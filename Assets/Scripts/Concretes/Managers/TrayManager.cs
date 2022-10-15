@@ -9,8 +9,6 @@ public class TrayManager : MonoBehaviour
     [SerializeField] private Vector3 servingTrayPosition;
     public DrinkStates _drinkStates;
     TrayController _trayController;
-    [SerializeField] private Sprite[] _playerDrinkSprite;
-    [SerializeField] private Image _playerDrinkImage;
 
     private void Awake()
     {
@@ -65,18 +63,11 @@ public class TrayManager : MonoBehaviour
 
     public void ChangingDrinkColor(string barrolColor)
     {
-        _trayController.SetDrinkColor(barrolColor);
-        SetPlayerDrinkUI();
+         _trayController.SetDrinkColor(barrolColor);
     }
 
     public void ResetDrinkState()
     {
         _trayController.SetNullDrink();
-        SetPlayerDrinkUI();
-    }
-
-    public void SetPlayerDrinkUI()
-    {
-        _playerDrinkImage.sprite = _playerDrinkSprite[_trayController.GetCurrentColor()];
     }
 }

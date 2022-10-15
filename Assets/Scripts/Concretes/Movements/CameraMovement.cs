@@ -68,12 +68,12 @@ namespace Servingame.Movements
             SaveGameManager.SaveGame();
         }
     }
-
     [System.Serializable]
     public struct CameraData
     {
         public Vector3 CameraPosition;
         public Quaternion CameraRotation;
     }
+
 }
 

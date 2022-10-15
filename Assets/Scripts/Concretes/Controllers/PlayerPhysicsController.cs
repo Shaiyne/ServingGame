@@ -71,6 +71,7 @@ public class PlayerPhysicsController : MonoBehaviour
             TraySignals.Instance.onResetDrinkState?.Invoke();
             UISignals.Instance.onResetScrollbar?.Invoke();
             UISignals.Instance.onActivenesScrollbar?.Invoke(false);
+            UISignals.Instance.onScrollbarFull?.Invoke();
         }
         else if (collision.gameObject.CompareTag("customerTag"))
         {
@@ -79,9 +80,5 @@ public class PlayerPhysicsController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-
-    }
 
 }

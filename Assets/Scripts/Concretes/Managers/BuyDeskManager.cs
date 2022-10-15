@@ -80,12 +80,3 @@ public class BuyDeskManager : MonoBehaviour
         go.layer = default;
     }
 }
-
-namespace Servingame.Managers
-{
-    [System.Serializable]
-    public struct DeskData
-    {
-        public List<int> DeskID;
-    }
-}

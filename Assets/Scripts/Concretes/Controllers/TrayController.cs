@@ -5,24 +5,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TrayController : MonoBehaviour , IDrink
+public class TrayController : MonoBehaviour , IColors
 {
-    [SerializeField] private Renderer drinkMaterial;
-    UpgradeData upgradeData = new UpgradeData();
+    [SerializeField] public Renderer drinkColor;
+    [SerializeField] public Image circleColor;
+    [SerializeField] public Sprite[] circleSprites;
     GameObject bottle;
-    private int earnMoneyFromDrink;
-    DrinkStates _currentColor;
     private float _isScrollbarFull;
-
+    ColorPlayerCommand circlePlayerCommand;
     public float RedDrink { get ; set ; }
     public float BlueDrink { get; set; }
     public float YellowDrink { get; set; }
     public float WhiteDrink { get; set; }
-
-
+    public int EarnMoneyFromDrink { get; set; }
+    public DrinkStates CurrentColor { get; set; }
+    public Color Color { get; set; }
     private void Awake()
     {
         bottle = transform.GetChild(0).gameObject;
+        circlePlayerCommand = new ColorPlayerCommand(this);
     }
     private void OnEnable()
     {
@@ -35,80 +36,20 @@ public class TrayController : MonoBehaviour , IDrink
 
     public void SetDrinkColor(string barrolColor)
     {
-        upgradeData = SaveGameManager.CurrentSaveData.UpgradeData;
-        switch (barrolColor)
-        {
-            case "blue":
-                drinkMaterial.material.SetColor("_Color", Color.blue);
-                _currentColor = DrinkStates.Blue;
-                BlueDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
-                earnMoneyFromDrink = 15;
-                break;
-            case "red":
-                drinkMaterial.material.SetColor("_Color", Color.red);
-                _currentColor = DrinkStates.Red;
-                RedDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
-                earnMoneyFromDrink = 20;
-                break;
-            case "yellow":
-                drinkMaterial.material.SetColor("_Color", Color.yellow);
-                _currentColor = DrinkStates.Yellow;
-                YellowDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
-                earnMoneyFromDrink = 25;
-                break;
-            case "white":
-                drinkMaterial.material.SetColor("_Color", Color.white);
-                _currentColor = DrinkStates.White;
-                WhiteDrink += 100 * upgradeData.ScrollbarSpeed * Time.deltaTime;
-                earnMoneyFromDrink = 30;
-                break;
-        }
-        if (BlueDrink >= 100)
-        {
-            _currentColor = DrinkStates.Blue;
-        }
-        else if (RedDrink >= 100)
-        {
-            _currentColor = DrinkStates.Red;
-        }
-        else if (YellowDrink >= 100)
-        {
-            _currentColor = DrinkStates.Yellow;
-        }
-        else if (WhiteDrink >= 100)
-        {
-            _currentColor = DrinkStates.White;
-        }
-        else if (BlueDrink + YellowDrink >= 100)
-        {
-            _currentColor = DrinkStates.GreenMixed;
-            earnMoneyFromDrink = 60;
-        }
-        else if (YellowDrink + RedDrink >= 100)
-        {
-            _currentColor = DrinkStates.OrangeMixed;
-            earnMoneyFromDrink = 65;
-        }
-        else if (BlueDrink + RedDrink >= 100)
-        {
-            _currentColor = DrinkStates.PurpleMixed;
-            earnMoneyFromDrink = 70;
-        }
-
-        else if (WhiteDrink + BlueDrink >= 100)
-        {
-            _currentColor = DrinkStates.CyanMixed;
-            earnMoneyFromDrink = 80;
-        }
+        circlePlayerCommand.SetDrinkStates(barrolColor);
+        circlePlayerCommand.Execute();
+        circleColor.sprite = circleSprites[(int)CurrentColor];
+        drinkColor.material.SetColor("_Color", Color);
     }
+
 
     public void CheckRequest(GameObject customerObject)
     {
         var isFull = _isScrollbarFull;
-        if (customerObject.transform.GetComponent<CustomerController>()._customerRequest == _currentColor && isFull==1)
+        if (customerObject.transform.GetComponent<CustomerController>()._customerRequest == CurrentColor && isFull==1)
         {
-            UISignals.Instance.onMoneyChange?.Invoke(earnMoneyFromDrink);
-            UpgradeSignals.Instance.onGetMoney?.Invoke(earnMoneyFromDrink);
+            UISignals.Instance.onMoneyChange?.Invoke(EarnMoneyFromDrink);
+            UpgradeSignals.Instance.onGetMoney?.Invoke(EarnMoneyFromDrink);
             InputSignals.Instance.onAnimationInputState?.Invoke(PlayerAnimationStates.Idle);
             UISignals.Instance.onResetScrollbar?.Invoke();
             UISignals.Instance.onActivenesScrollbar?.Invoke(false);
@@ -126,22 +67,25 @@ public class TrayController : MonoBehaviour , IDrink
 
     public void SetNullDrink()
     {
-        earnMoneyFromDrink = 0;
+        EarnMoneyFromDrink = 0;
         BlueDrink = 0;
         RedDrink = 0;
         YellowDrink = 0;
         WhiteDrink = 0;
-        _currentColor = DrinkStates.Null;
+        CurrentColor = DrinkStates.Null;
+        Color = Color.black;
+        circleColor.sprite = circleSprites[(int)CurrentColor];
+        circlePlayerCommand.SetNullAll();
     }
 
     public int GetEarnMoney()
     {
-        return earnMoneyFromDrink;
+        return EarnMoneyFromDrink;
     }
 
     public int GetCurrentColor()
     {
-        return ((int)_currentColor);
+        return ((int)CurrentColor);
     }
 
 }

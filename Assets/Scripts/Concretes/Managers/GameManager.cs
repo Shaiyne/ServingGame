@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         OnPlay();
-        //CoreGameSignals.Instance.onGamePlay?.Invoke();
     }
     private void OnEnable()
     {

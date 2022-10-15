@@ -18,11 +18,7 @@ public class UIScrollbar : MonoBehaviour
 
     public void GetScrollbar()
     {
-        if (scrollbar.size == 1)
-        {
-            TraySignals.Instance.onCurrentScrollbarValue?.Invoke(scrollbar.size);
-        }
-        
+        TraySignals.Instance.onCurrentScrollbarValue?.Invoke(scrollbar.size);
     }
 
     public void ResetScrollbar()

@@ -48,17 +48,6 @@ MonoBehaviour:
   fillupTrayPosition: {x: 0.65, y: 2.3, z: 0.9}
   servingTrayPosition: {x: 0.65, y: 2.6, z: 0.7}
   _drinkStates: 0
-  _playerDrinkSprite:
-  - {fileID: 21300000, guid: 9ddd7509be2755546849ce1d23607856, type: 3}
-  - {fileID: 21300000, guid: a06ea9698cae34147a4912ccb78cb3ba, type: 3}
-  - {fileID: 21300000, guid: 26f529279a674e04cb1120c9e9646c71, type: 3}
-  - {fileID: 21300000, guid: 29b12e57491a0964fbb200bec48d2dde, type: 3}
-  - {fileID: 21300000, guid: 6e09d55185c87704ba1b2280c3e81c7b, type: 3}
-  - {fileID: 21300000, guid: 475591eef631b1e478595cb82c53d619, type: 3}
-  - {fileID: 21300000, guid: 6ef518e4f0ee84b4888a18986d06dc9f, type: 3}
-  - {fileID: 21300000, guid: 802dec6bf27b0114a9c518131a8710ab, type: 3}
-  - {fileID: 21300000, guid: f0edaee830a9cad42bfda4211bbcfaf2, type: 3}
-  _playerDrinkImage: {fileID: 1213838855126410362}
 --- !u!114 &538589026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,9 +60,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5192560cbf1ea744e8072bf2d67db604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drinkMaterial: {fileID: 7651378968977255868}
-  _uiScrollbar: {fileID: 0}
-  gh: {fileID: 0}
+  drinkColor: {fileID: 7651378968977255868}
+  circleColor: {fileID: 1213838855126410362}
+  circleSprites:
+  - {fileID: 21300000, guid: 9ddd7509be2755546849ce1d23607856, type: 3}
+  - {fileID: 21300000, guid: a06ea9698cae34147a4912ccb78cb3ba, type: 3}
+  - {fileID: 21300000, guid: 26f529279a674e04cb1120c9e9646c71, type: 3}
+  - {fileID: 21300000, guid: 29b12e57491a0964fbb200bec48d2dde, type: 3}
+  - {fileID: 21300000, guid: 6e09d55185c87704ba1b2280c3e81c7b, type: 3}
+  - {fileID: 21300000, guid: 475591eef631b1e478595cb82c53d619, type: 3}
+  - {fileID: 21300000, guid: 6ef518e4f0ee84b4888a18986d06dc9f, type: 3}
+  - {fileID: 21300000, guid: 802dec6bf27b0114a9c518131a8710ab, type: 3}
+  - {fileID: 21300000, guid: f0edaee830a9cad42bfda4211bbcfaf2, type: 3}
 --- !u!1 &1586669743
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +518,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 124
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &2029699454
 CapsuleCollider:
@@ -536,6 +534,18 @@ CapsuleCollider:
   m_Height: 4.1460724
   m_Direction: 1
   m_Center: {x: 0.022667825, y: 2.034184, z: 0}
+--- !u!114 &770393640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4841320374562937898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc82321844b29d42be83eb45a914e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2029699453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,7 +561,6 @@ MonoBehaviour:
   playerManager: {fileID: 2029699456}
   _isReadyToPlay: 1
   _isReadyToMove: 0
-  _levelData: []
 --- !u!114 &2029699456
 MonoBehaviour:
   m_ObjectHideFlags: 0

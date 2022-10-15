@@ -587,7 +587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameStates: 0
   MoneyText: {fileID: 2699568686686395067}
-  MoneyUI: {fileID: 2699568687041593363}
+  _moneyUI: {fileID: 2699568687041593363}
   _upgradePanel: {fileID: 2699568685326723526}
   colorMixedInformationPanel: {fileID: 9061923534180701423}
   _hrPanel: {fileID: 799900912336366585}

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    private Animator animator;
+    Animator _animator;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     public void ChangePlayerAnimation(PlayerAnimationStates playerAnimationStates)
@@ -17,19 +17,19 @@ public class AnimationController : MonoBehaviour
         switch (playerAnimationStates)
         {
             case PlayerAnimationStates.Idle:
-                animator.Play(playerAnimationStates.ToString());
+                _animator.Play(playerAnimationStates.ToString());
                 break;
             case PlayerAnimationStates.Running:
-                animator.Play(playerAnimationStates.ToString());
+                _animator.Play(playerAnimationStates.ToString());
                 break;
             case PlayerAnimationStates.ServingIdle:
-                animator.Play(playerAnimationStates.ToString());
+                _animator.Play(playerAnimationStates.ToString());
                 break;
             case PlayerAnimationStates.ServingRunning:
-                animator.Play(playerAnimationStates.ToString());
+                _animator.Play(playerAnimationStates.ToString());
                 break;
             case PlayerAnimationStates.FillUp:
-                animator.Play(playerAnimationStates.ToString());
+                _animator.Play(playerAnimationStates.ToString());
                 break;
         }
     }

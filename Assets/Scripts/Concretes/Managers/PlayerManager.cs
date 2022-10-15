@@ -81,7 +81,6 @@ public class PlayerManager : MonoBehaviour
     public void CompareDrinkToRequest(GameObject customerObject)
     {
         _trayManager.CompareRequest(customerObject);
-        _trayManager.SetPlayerDrinkUI();
     }
     public void onPlay()
     {

@@ -16,7 +16,7 @@ public class CustomerController : MonoBehaviour
         customerBool = false;
         FindObjectOfType<AudioManager>().Play("OrderSound");
         _upgradeData.TypeDrinkSize = SaveGameManager.CurrentSaveData.UpgradeData.TypeDrinkSize;
-        _customerRequest = (DrinkStates)Random.Range(1, _upgradeData.TypeDrinkSize + 1); //Null var o yüzden +1
+        _customerRequest = (DrinkStates)Random.Range(1, _upgradeData.TypeDrinkSize + 1); //DrinkState ilk deðer de Null var o yüzden +1
         _customerRequestUI.SetRequestUI(_customerRequest);
     }
 

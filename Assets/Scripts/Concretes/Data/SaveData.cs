@@ -1,25 +1,20 @@
 using Servingame.Controllers;
-using Servingame.Managers;
 using Servingame.Movements;
 using System;
 using UnityEngine;
 
-namespace SaveLoadSystem
+[System.Serializable]
+public class SaveData
 {
-    [System.Serializable]
-    public class SaveData
-    {
-        public PlayerData PlayerData = new PlayerData();
+    public PlayerData PlayerData = new PlayerData();
 
-        public CameraData CameraData = new CameraData();
+    public CameraData CameraData = new CameraData();
 
-        public UpgradeData UpgradeData = new UpgradeData();
+    public UpgradeData UpgradeData = new UpgradeData();
 
-        public MoneyData MoneyData = new MoneyData();
+    public MoneyData MoneyData = new MoneyData();
 
-        public DeskData DeskData = new DeskData();
+    public DeskData DeskData = new DeskData();
 
-        public HRData HRData = new HRData();
-    }
-
+    public HRData HRData = new HRData();
 }

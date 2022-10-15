@@ -1,5 +1,4 @@
 using SaveLoadSystem;
-using Servingame.Controllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,16 +26,6 @@ public class MoneyController : MonoBehaviour
     {
         MoneyData = SaveGameManager.CurrentSaveData.MoneyData;
         return MoneyData.Money;
-    }
-
-}
-
-namespace Servingame.Controllers
-{
-    [System.Serializable]
-    public struct MoneyData
-    {
-        public int Money;
     }
 
 }
