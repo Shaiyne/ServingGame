@@ -26,8 +26,8 @@ namespace SaveLoadSystem
             }
             if (!File.Exists(dir + FileName))
             {
-                CurrentSaveData.CameraData.CameraPosition = new Vector3(-1.1265778f, 5.209f, -5.145f);
-                CurrentSaveData.CameraData.CameraRotation = Quaternion.Euler(52.563f, -2.51f, -0.816f);
+                CurrentSaveData.CameraData.CameraPosition = new Vector3(-1.1265778f, 6.6f, -4.924f);
+                CurrentSaveData.CameraData.CameraRotation = Quaternion.Euler(58.6061325f, -3f, 358.676636f);
                 CurrentSaveData.PlayerData.PlayerPosition = new Vector3(-1, 0, 0);
                 CurrentSaveData.PlayerData.PlayerRotation = Quaternion.Euler(0, 0, 0);
                 CurrentSaveData.UpgradeData.CustomerSize = 1;
@@ -39,6 +39,7 @@ namespace SaveLoadSystem
                 CurrentSaveData.MoneyData.Money = 10000;
                 CurrentSaveData.HRData.EmployeeBuyCost = 300;
                 CurrentSaveData.HRData.EmployeeID = null;
+                
             }
             string json = JsonUtility.ToJson(CurrentSaveData, true);
             File.WriteAllText(dir + FileName, json);
@@ -67,7 +68,19 @@ namespace SaveLoadSystem
             }
             CurrentSaveData = tempData;
         }
+        public static void NewGameSave()
+        {
+            var dir = Application.persistentDataPath + SaveDirectory;
+            if (Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            if (File.Exists(dir + FileName))
+            {
+                File.Delete(dir + FileName);
 
+            }
+        }
     }
 
 }

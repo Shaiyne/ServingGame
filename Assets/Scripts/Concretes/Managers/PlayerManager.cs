@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
         _inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         _trayManager = GameObject.Find("TrayManager").GetComponent<TrayManager>();
         _playerSaveData = GetComponent<PlayerSaveData>();
+        _playerSaveData.LoadPlayerTransform();
     }
 
     private void OnEnable()
@@ -29,10 +30,7 @@ public class PlayerManager : MonoBehaviour
     {
         DesubsribeEvents();
     }
-    public void OnPlay()
-    {
-        _playerController.IsReadyToPlay(true);
-    }
+
     void SubscribeEvents()
     {
         InputSignals.Instance.onInputTaken += onActiveMovement;
@@ -84,6 +82,7 @@ public class PlayerManager : MonoBehaviour
     }
     public void onPlay()
     {
+        _playerController.IsReadyToPlay(true);
         _playerController.EnableMovement();
         _playerSaveData.LoadPlayerTransform();
     }

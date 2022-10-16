@@ -10,8 +10,6 @@ namespace Servingame.Controllers
 {
     public class PlayerController : MonoBehaviour , IEntityController , IMovement
     {
-        //PlayerAnimation _playerAnimation;
-        [SerializeField] private PlayerManager playerManager;
         HorizontalMove _horizontalMove;
         VerticalMove _verticalMove;
         RotationMove _rotationMove;

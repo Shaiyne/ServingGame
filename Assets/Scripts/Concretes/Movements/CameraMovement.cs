@@ -17,8 +17,8 @@ namespace Servingame.Movements
         {
             if (!File.Exists(Application.persistentDataPath + "/Saves/" + "SaveData.sav"))
             {
-                transform.position = new Vector3(1.1265778f, 5.209f, -5.145f);
-                transform.rotation = Quaternion.Euler(52.563f, -2.51f, -0.816f);
+                transform.position = new Vector3(-1.1265778f, 6.6f, -4.924f);
+                transform.rotation = Quaternion.Euler(58.6061325f, -3f, 358.676636f);
                 OnPause();
             }
             CoreGameSignals.Instance.onPlay += OnPlay;

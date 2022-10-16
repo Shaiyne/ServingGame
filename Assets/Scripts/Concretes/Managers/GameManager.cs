@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     {
         OnPlay();
     }
+
     private void OnEnable()
     {
         SubscribeEvent();
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     }
     private void SubscribeEvent()
     {
-        CoreGameSignals.Instance.onPlay += OnPlay;
+        //CoreGameSignals.Instance.onPlay += OnPlay;
         CoreGameSignals.Instance.onGamePlay += GameOpen;
         CoreGameSignals.Instance.onGamePause += GamePause;
     }
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void OnPlay()
     {
-        CoreGameSignals.Instance.onPlay?.Invoke();
+        CoreGameSignals.Instance.onPlay.Invoke();
     }
     private void OnApplicationQuit()
     {

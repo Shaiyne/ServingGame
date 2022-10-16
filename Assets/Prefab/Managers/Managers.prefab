@@ -179,6 +179,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: CafeSound
+    clip: {fileID: 8300000, guid: 02d9ead4b51f36747b1e4f9adf208691, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!1 &387817629481820570
 GameObject:
   m_ObjectHideFlags: 0
