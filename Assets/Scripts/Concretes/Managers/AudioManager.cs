@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-        Play("CafeSound");
+        Play("ThemeSound1");
     }
     public void Play(string name)
     {

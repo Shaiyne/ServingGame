@@ -13,6 +13,10 @@ public class BuyDeskManager : MonoBehaviour
 
     private void Awake()
     {
+        //LoadDesks();
+    }
+    private void Start()
+    {
         LoadDesks();
     }
     private void OnEnable()

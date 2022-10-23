@@ -10,10 +10,8 @@ public class MoneyController : MonoBehaviour
     private void Awake()
     {
         MoneyData.Money = LoadMoney();
-    }
-    private void Start()
-    {
-        
+        CoreGameSignals.Instance.onQuit += Quit;
+        CoreGameSignals.Instance.onPause += Quit;
     }
 
     public void SaveMoney(int value)
@@ -28,4 +26,8 @@ public class MoneyController : MonoBehaviour
         return MoneyData.Money;
     }
 
+    public void Quit()
+    {
+        SaveGameManager.CurrentSaveData.MoneyData = MoneyData;
+    } 
 }

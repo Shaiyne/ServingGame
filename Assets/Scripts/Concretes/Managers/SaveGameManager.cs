@@ -26,8 +26,8 @@ namespace SaveLoadSystem
             }
             if (!File.Exists(dir + FileName))
             {
-                CurrentSaveData.CameraData.CameraPosition = new Vector3(-1.1265778f, 6.6f, -4.924f);
-                CurrentSaveData.CameraData.CameraRotation = Quaternion.Euler(58.6061325f, -3f, 358.676636f);
+                CurrentSaveData.CameraData.CameraPosition = new Vector3(-1.1265778f, 10.5f, -5.83f);
+                CurrentSaveData.CameraData.CameraRotation = Quaternion.Euler(58.6061325f, -2f, 358.676636f);
                 CurrentSaveData.PlayerData.PlayerPosition = new Vector3(-1, 0, 0);
                 CurrentSaveData.PlayerData.PlayerRotation = Quaternion.Euler(0, 0, 0);
                 CurrentSaveData.UpgradeData.CustomerSize = 1;
@@ -36,7 +36,7 @@ namespace SaveLoadSystem
                 CurrentSaveData.UpgradeData.CustomerCost = 100;
                 CurrentSaveData.UpgradeData.TypeDrinkCost = 300;
                 CurrentSaveData.UpgradeData.ScrollbarSpeedCost = 100;
-                CurrentSaveData.MoneyData.Money = 10000;
+                CurrentSaveData.MoneyData.Money = 300;
                 CurrentSaveData.HRData.EmployeeBuyCost = 300;
                 CurrentSaveData.HRData.EmployeeID = null;
                 

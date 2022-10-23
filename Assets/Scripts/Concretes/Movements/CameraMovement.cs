@@ -24,6 +24,7 @@ namespace Servingame.Movements
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onPause += OnPause;
             CoreGameSignals.Instance.onQuit += OnQuit;
+            OnPlay();
         }
         private void Start()
         {
@@ -66,6 +67,11 @@ namespace Servingame.Movements
             _cameraData.CameraRotation = transform1.rotation;
             SaveGameManager.CurrentSaveData.CameraData = _cameraData;
             SaveGameManager.SaveGame();
+        }
+
+        private void OnApplicationQuit()
+        {
+            OnQuit();
         }
     }
     [System.Serializable]

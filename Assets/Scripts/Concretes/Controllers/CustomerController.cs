@@ -19,6 +19,4 @@ public class CustomerController : MonoBehaviour
         _customerRequest = (DrinkStates)Random.Range(1, _upgradeData.TypeDrinkSize + 1); //DrinkState ilk deðer de Null var o yüzden +1
         _customerRequestUI.SetRequestUI(_customerRequest);
     }
-
-
 }

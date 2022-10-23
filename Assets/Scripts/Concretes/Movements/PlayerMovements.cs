@@ -16,7 +16,7 @@ public abstract class PlayerMovements
     public void PlayerDirection(float direction, float moveSpeed,IEntityController entityController,Vector3 vctr)
     {
         if (direction == 0f) return;
-        if (Input.GetMouseButton(0))
+        if (Input.GetButton("Fire1"))
         {
             direction = ClampMethod(direction);
             entityController.transform.Translate(vctr * direction * Time.deltaTime * moveSpeed, Space.World);

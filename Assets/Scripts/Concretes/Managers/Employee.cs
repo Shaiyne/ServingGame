@@ -57,7 +57,7 @@ public class Employee : MonoBehaviour
             if (bottleTarget2 != null)
             {
                 meshAgent.SetDestination(bottleTarget1.transform.GetChild(employeeID).position);
-                if (Bottle > 50)
+                if (Bottle > 30)
                 {
                     meshAgent.SetDestination(bottleTarget2.transform.GetChild(employeeID).position);
                     if (Bottle > 100)
@@ -151,6 +151,7 @@ public class Employee : MonoBehaviour
     private void CheckMission()
     {
         customers = GameObject.FindGameObjectsWithTag("customerTag");
+
         if (employeeID < customers.Length)
         {
             if (isMissionActive == false)
@@ -159,15 +160,16 @@ public class Employee : MonoBehaviour
                 {
                     if (customers[customerID].GetComponent<CustomerController>().customerBool == false)
                     {
-                        customers[customerID].GetComponent<CustomerController>().customerBool = true;
                         isMissionActive = true;
                         target = customers[customerID];
                         drinkStates = customers[customerID].GetComponent<CustomerController>()._customerRequest;
                         CompareColor(drinkStates);
+                        customers[customerID].GetComponent<CustomerController>().customerBool = true;
                         return;
                     }
                     else
                     {
+                        Debug.Log("ad");
                         customerID++;
                     }
                 }

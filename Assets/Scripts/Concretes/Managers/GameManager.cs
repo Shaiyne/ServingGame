@@ -58,10 +58,16 @@ public class GameManager : MonoBehaviour
     {
         CoreGameSignals.Instance.onPlay.Invoke();
     }
+    private void OnApplicationPause(bool pause)
+    {
+        CoreGameSignals.Instance.onPause?.Invoke();
+        CoreGameSignals.Instance.onQuit?.Invoke();
+    }
     private void OnApplicationQuit()
     {
         CoreGameSignals.Instance.onPause?.Invoke();
         CoreGameSignals.Instance.onQuit?.Invoke();
     }
+
 
 }

@@ -15,10 +15,15 @@ namespace Servingame.Controllers
         RotationMove _rotationMove;
         Rigidbody rb;
         [SerializeField]private bool _isReadyToPlay,_isReadyToMove=false;
+        public FloatingJoystick floatingJoystick;
+        public GameObject JoystickActiviness;
 
         public float HorizontalSpeed { get ; set ; }
         public float VerticalSpeed { get ; set ; }
         public float MoveSpeed { get ; set ; }
+
+        public float speed;
+        public float turnSpeed;
 
         private void Awake()
         {
@@ -26,7 +31,9 @@ namespace Servingame.Controllers
             _verticalMove = new VerticalMove(this);
             _rotationMove = new RotationMove(this);
             rb = GetComponent<Rigidbody>();
-            MoveSpeed = 5f;
+            MoveSpeed = 1f;
+            floatingJoystick = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
+            JoystickActiviness = GameObject.Find("Joystick");
         }
 
         private void FixedUpdate()
@@ -49,7 +56,7 @@ namespace Servingame.Controllers
         }
         private void OnDisable()
         {
-            DisableMovement();
+            //DisableMovement();
         }
 
         public void IsPlayerMoved()
@@ -58,15 +65,19 @@ namespace Servingame.Controllers
             _horizontalMove.HorizontalMovement(HorizontalSpeed, MoveSpeed);
             _verticalMove.VerticalMovement(VerticalSpeed, MoveSpeed);
             _rotationMove.RotationPlayer(HorizontalSpeed, VerticalSpeed);
+            JoystickMovement();
         }
+
         public void EnableMovement()
         {
             _isReadyToMove = true;
+            JoystickActiviness.SetActive(true);
 
         }
         public void DisableMovement()
         {
             _isReadyToMove = false;
+            JoystickActiviness.SetActive(false);
         }
         public void IsReadyToPlay(bool readyToPlayBool)
         {
@@ -90,6 +101,18 @@ namespace Servingame.Controllers
             HorizontalSpeed = x;
             VerticalSpeed = z;
         }
+
+        public void JoystickMovement()
+        {
+            float horizontal = floatingJoystick.Horizontal;
+            float vertical = floatingJoystick.Vertical;
+            Vector3 addedPos = new Vector3(horizontal * speed * Time.deltaTime, 0, vertical * speed * Time.deltaTime);
+            transform.position += addedPos;
+
+            Vector3 direction = Vector3.forward * vertical + Vector3.right * horizontal;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.deltaTime);
+        }
+
     }
 
 }
